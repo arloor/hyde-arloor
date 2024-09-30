@@ -1,3 +1,19 @@
+.iframe-container {
+	overflow: hidden;
+	padding-top: 56.25%;
+	width: 100%;
+	position: relative;
+}
+
+.iframe-container iframe {
+	border: 0;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -11,7 +27,8 @@ html {
 	font-weight: $root-font-weight;
 }
 
-html, body {
+html,
+body {
 	margin: 0;
 	padding: 0;
 }
@@ -104,29 +121,37 @@ a {
 	color: $link-color;
 	text-decoration: none;
 	word-wrap: break-word;
+
 	&.sidebar-nav-item {
 		&:hover {
 			@include link-no-decoration();
 		}
+
 		&:focus {
 			@include link-no-decoration();
 		}
 	}
+
 	&:focus {
 		@include link-hover();
+
 		&.tag {
 			@include link-no-decoration();
 		}
 	}
+
 	&:hover {
 		@include link-hover();
+
 		&.tag {
 			@include link-no-decoration();
 		}
 	}
+
 	&.tag {
 		@include link-no-decoration();
 	}
+
 	&.read-more-symbol {
 		text-decoration: none;
 		@include link-no-decoration();
