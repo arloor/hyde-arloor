@@ -4,13 +4,18 @@
 
 ## highlight.js
 
+参考：
+
+- [Basic Usage In the Browser](https://github.com/highlightjs/highlight.js?tab=readme-ov-file#in-the-browser)
+- [Supported Languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md)
+
 用在：layouts/partials/highlight-js.html
 
 ```bash
 mkdir -p static/js/languages
 curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js -Lf -o static/js/highlight.min.js
 ## 特定语言
-curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js -o static/js/languages/go.min.js
+curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js -o static/js/languages/powershell.min.js
 
 mkdir -p static/styles
 ## 样式
