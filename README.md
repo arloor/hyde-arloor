@@ -16,6 +16,7 @@ mkdir -p static/js/languages
 curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js -Lf -o static/js/highlight.min.js
 ## 特定语言
 curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js -o static/js/languages/powershell.min.js
+curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dos.min.js -o static/js/languages/dos.min.js
 
 mkdir -p static/styles
 ## 样式
