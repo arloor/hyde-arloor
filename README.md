@@ -22,7 +22,8 @@ mkdir -p static/styles
 ## 样式
 curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css -o static/styles/default.min.css
 curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css -o static/styles/github.min.css
-curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styes/atom-one-dark.min.css -o static/styles/atom-one-dark.min.css
+curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css -o static/styles/atom-one-dark.min.css
+curl https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css -o static/styles/github-dark.min.css
 ```
 
 ## Font Awesome
