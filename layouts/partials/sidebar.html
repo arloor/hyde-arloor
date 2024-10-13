@@ -3,7 +3,7 @@
   <div class="container {{ with .Site.Params.sidebarSticky }}sidebar-sticky{{ end }}">
     <div class="sidebar-about">
       <span class="site__title">
-        <a href="{{ .Site.BaseURL }}">
+        <a href="/">
           {{ with .Site.Params.logoimage }}
           {{ $strippedSlash := ($.Site.Params.logoimage | replaceRE "^(/)+(.*)" "$2") }}
           {{ $logoImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }}
@@ -13,15 +13,15 @@
           {{ end }}
         </a>
       </span>
-      <a href="{{ .Site.BaseURL }}">
+      <a href="/">
         {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
-        {{ with .Site.Params.authorimage }}
+        <!-- {{ with .Site.Params.authorimage }}
         {{ $strippedSlash := ($.Site.Params.authorimage | replaceRE "^(/)+(.*)" "$2") }}
-        {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }}
+        {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }} -->
         <div class="author-image">
-          <img src="{{$authorImage}}" alt="Author Image" class="img--circle img--headshot element--center">
+          <img src="{{$.Site.Params.authorimage}}" alt="Author Image" class="img--circle img--headshot element--center">
         </div>
-        {{ end }}
+        <!-- {{ end }} -->
         {{ end }}
       </a>
       {{ with .Site.Params.social.gravatar}}
@@ -39,15 +39,16 @@
       <label for="menuToggle">{{ .Site.Title }}</label>
       <div class="menu-content">
         <div class="show-in-small">
-          <a href="{{ .Site.BaseURL }}">
+          <a href="/">
             {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
-            {{ with .Site.Params.authorimage }}
+            <!-- {{ with .Site.Params.authorimage }}
             {{ $strippedSlash := ($.Site.Params.authorimage | replaceRE "^(/)+(.*)" "$2") }}
-            {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }}
+            {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }} -->
             <div class="author-image">
-              <img src="{{$authorImage}}" alt="Author Image" class="img--circle img--headshot element--center">
+              <img src="{{$.Site.Params.authorimage}}" alt="Author Image"
+                class="img--circle img--headshot element--center">
             </div>
-            {{ end }}
+            <!-- {{ end }} -->
             {{ end }}
           </a>
         </div>
