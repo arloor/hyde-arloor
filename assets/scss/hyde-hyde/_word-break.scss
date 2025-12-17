@@ -7,8 +7,8 @@ a {
   word-break: break-word;
 }
 
-// 内联代码的文本换行
-code {
+// 内联代码的文本换行（只对非pre code生效）
+:not(pre) > code {
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -49,19 +49,19 @@ table {
     word-break: break-word;
   }
   
-  // 代码块优化
-  pre {
-    overflow-x: auto;
-    max-width: 100%;
+//   // 代码块优化
+//   pre {
+//     overflow-x: auto;
+//     max-width: 100%;
     
-    code {
-      white-space: pre-wrap !important;
-      word-break: break-all;
-    }
-  }
+//     code {
+//       white-space: pre-wrap !important;
+//       word-break: break-all;
+//     }
+//   }
   
-  // 内联代码
-  code {
+  // 内联代码（只对非pre code生效）
+  :not(pre) > code {
     word-break: break-word;
     overflow-wrap: anywhere;
   }
