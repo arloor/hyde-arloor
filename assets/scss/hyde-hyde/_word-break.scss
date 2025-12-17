@@ -1,0 +1,74 @@
+// 修复小屏幕上长路径不换行的问题
+// Word break fixes for long paths and URLs on small screens
+
+// 链接的文本换行 - 增强版
+a {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+// 内联代码的文本换行
+code {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+// 代码块中的文本换行
+pre {
+  code {
+    white-space: pre-wrap !important;
+    overflow-wrap: break-word;
+  }
+}
+
+// 段落文本换行
+p {
+  overflow-wrap: break-word;
+}
+
+// 表格单元格的文本换行
+table {
+  td, th {
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+// 代码高亮块
+.hljs {
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word;
+}
+
+// 小屏幕特定优化
+@media (max-width: 48em) {
+  // 确保长链接可以换行
+  a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  
+  // 代码块优化
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    
+    code {
+      white-space: pre-wrap !important;
+      word-break: break-all;
+    }
+  }
+  
+  // 内联代码
+  code {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  
+  // 确保容器不会超出屏幕
+  .content {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}

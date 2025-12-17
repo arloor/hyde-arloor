@@ -2,6 +2,10 @@
 
 # 静态资源（我的修改）
 
+## 长文本换行
+
+themes/hyde-arloor/assets/scss/hyde-hyde/_word-break.scss
+
 ## 代码颜色
 
 搜索 code-style-npf 并修改
