@@ -2,6 +2,10 @@
 
 # 静态资源（我的修改）
 
+## code-copy-button.html
+
+增加了代码复制按钮
+
 ## highlight.js
 
 参考：

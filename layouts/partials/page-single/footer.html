@@ -5,6 +5,7 @@
 {{ end }}
 {{ partial "footer/font-awesome-js.html" . }}
 {{ partial "highlight-js.html" . }}
+{{ partial "code-copy-button.html" . }}
 {{ with .Site.Params.toc }}
 {{ if and (eq . "tocbot") (ne $include_toc false) }}
 <script src="https://us.arloor.dev/https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.js"></script>
