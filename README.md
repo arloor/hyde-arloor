@@ -2,6 +2,10 @@
 
 # 静态资源（我的修改）
 
+## 代码颜色
+
+搜索 code-style-npf 并修改
+
 ## code-copy-button.html
 
 增加了代码复制按钮
