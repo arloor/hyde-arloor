@@ -13,13 +13,13 @@ code {
   word-break: break-word;
 }
 
-// 代码块中的文本换行
-pre {
-  code {
-    white-space: pre-wrap !important;
-    overflow-wrap: break-word;
-  }
-}
+// // 代码块中的文本换行
+// pre {
+//   code {
+//     white-space: pre-wrap !important;
+//     overflow-wrap: break-word;
+//   }
+// }
 
 // 段落文本换行
 p {
@@ -35,11 +35,11 @@ table {
   }
 }
 
-// 代码高亮块
-.hljs {
-  white-space: pre-wrap !important;
-  overflow-wrap: break-word;
-}
+// // 代码高亮块
+// .hljs {
+//   white-space: pre-wrap !important;
+//   overflow-wrap: break-word;
+// }
 
 // 小屏幕特定优化
 @media (max-width: 48em) {
