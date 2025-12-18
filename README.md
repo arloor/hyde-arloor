@@ -10,6 +10,10 @@ themes/hyde-arloor/assets/scss/hyde-hyde/_word-break.scss
 
 搜索 code-style-npf 并修改
 
+## 代码字体大小
+
+搜索 $code-font-size:。我从.9rem 修改为 1rem
+
 ## code-copy-button.html
 
 增加了代码复制按钮
