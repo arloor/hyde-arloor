@@ -8,7 +8,7 @@ a {
 }
 
 // 内联代码的文本换行（只对非pre code生效）
-:not(pre) > code {
+:not(pre)>code {
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -28,7 +28,9 @@ p {
 
 // 表格单元格的文本换行
 table {
-  td, th {
+
+  td,
+  th {
     word-wrap: break-word;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -39,33 +41,35 @@ table {
 // .hljs {
 //   white-space: pre-wrap !important;
 //   overflow-wrap: break-word;
+//   font-size: 1rem !important;
 // }
 
 // 小屏幕特定优化
 @media (max-width: 48em) {
+
   // 确保长链接可以换行
   a {
     overflow-wrap: anywhere;
     word-break: break-word;
   }
-  
-//   // 代码块优化
-//   pre {
-//     overflow-x: auto;
-//     max-width: 100%;
-    
-//     code {
-//       white-space: pre-wrap !important;
-//       word-break: break-all;
-//     }
-//   }
-  
+
+  //   // 代码块优化
+  //   pre {
+  //     overflow-x: auto;
+  //     max-width: 100%;
+
+  //     code {
+  //       white-space: pre-wrap !important;
+  //       word-break: break-all;
+  //     }
+  //   }
+
   // 内联代码（只对非pre code生效）
-  :not(pre) > code {
+  :not(pre)>code {
     word-break: break-word;
     overflow-wrap: anywhere;
   }
-  
+
   // 确保容器不会超出屏幕
   .content {
     max-width: 100%;
