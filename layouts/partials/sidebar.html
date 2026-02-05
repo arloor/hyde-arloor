@@ -37,7 +37,7 @@
     <div class="collapsible-menu">
       <input type="checkbox" id="menuToggle">
       <label for="menuToggle">{{ .Site.Title }}</label>
-      <div class="menu-content">
+      <div class="menu-content menu-content--mobile">
         <div class="show-in-small">
           <a href="/">
             {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
@@ -55,6 +55,12 @@
         {{ partial "sidebar/menu.html" . }}
         {{ partial "sidebar/social.html" . }}
       </div>
+    </div>
+    <div class="menu-content menu-content--desktop">
+      {{ partial "sidebar/menu.html" . }}
+    </div>
+    <div class="social-wrap social-wrap--desktop">
+      {{ partial "sidebar/social.html" . }}
     </div>
     {{ partial "sidebar/copyright.html" . }}
   </div>
