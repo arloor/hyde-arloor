@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-    {{ block "header" . }}{{ end }}
-    <body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
-    <script>
-    if (localStorage.getItem('sidebar-collapsed') === 'true') {
+{{ block "header" . }}{{ end }}
+
+<body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
+  <script>
+    // 检查是否为iframe页面
+    var isIframePage = {{ if eq .Params.type "iframe" }}true{{ else }}false{{ end }};
+
+    if (isIframePage) {
+      // iframe页面自动收起sidebar
       document.body.classList.add('sidebar-collapsed');
+    } else {
+      // 其他页面根据localStorage决定，默认展开
+      if (localStorage.getItem('sidebar-collapsed') === 'true') {
+        document.body.classList.add('sidebar-collapsed');
+      }
     }
+
     function toggleSidebar() {
       document.body.classList.toggle('sidebar-collapsed');
-      localStorage.setItem('sidebar-collapsed', document.body.classList.contains('sidebar-collapsed'));
+      // 只在非iframe页面保存状态
+      if (!isIframePage) {
+        localStorage.setItem('sidebar-collapsed', document.body.classList.contains('sidebar-collapsed'));
+      }
     }
-    </script>
-    {{ partial "sidebar.html" . }}
-        <div class="content container">
-            {{ block "content" . }}{{ end }}
-        </div>
-        {{ block "footer" . }}{{ end }}
-    </body>
+  </script>
+  {{ partial "sidebar.html" . }}
+  <div class="content container">
+    {{ block "content" . }}{{ end }}
+  </div>
+  {{ block "footer" . }}{{ end }}
+</body>
+
 </html>

@@ -59,6 +59,8 @@
     {{ partial "sidebar/copyright.html" . }}
   </div>
 </div>
-<button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
-  <span class="sidebar-toggle-icon"></span>
-</button>
+<div class="sidebar-toggle-wrapper" onclick="toggleSidebar()">
+  <button class="sidebar-toggle" aria-label="Toggle sidebar">
+    <span class="sidebar-toggle-icon"></span>
+  </button>
+</div>
