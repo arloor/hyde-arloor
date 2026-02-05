@@ -4,6 +4,7 @@
   color: rgba(255, 255, 255, 0.5);
   padding: 2rem 1rem;
   text-align: center;
+  transition: transform 0.3s ease;
   a {
     color: $gray-1;
     border: none;
@@ -85,4 +86,9 @@
 .builtwith {
   padding-top: .2rem;
   @extend %small-center-text;
+}
+
+// Sidebar toggle button (desktop only, hidden by default)
+.sidebar-toggle {
+  display: none;
 }
