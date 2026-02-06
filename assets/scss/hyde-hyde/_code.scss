@@ -48,6 +48,21 @@ code {
 	// font-weight: 600;
 }
 
+// Do not apply inline code styling inside headings.
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+	border-radius: 0;
+	padding: 0;
+}
+
 // highlight.js
 .hljs {
 	font-family: $code-font-family;
