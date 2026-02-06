@@ -104,6 +104,20 @@
     font-size: $small-device-font-size;
   }
 
+  html {
+    scroll-padding-top: var(--top-nav-offset, 4rem);
+    
+  }
+
+  .post h1,
+  .post h2,
+  .post h3,
+  .post h4,
+  .post h5,
+  .post h6 {
+    scroll-margin-top: 1rem;
+  }
+
   .show-in-small {
     display: none;
   }

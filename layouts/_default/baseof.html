@@ -34,6 +34,8 @@
     (function () {
       var targets = document.querySelectorAll('[data-auto-height]');
       if (!targets.length) {
+        setTopNavOffset();
+        bindTopNavOffsetEvents();
         return;
       }
 
@@ -56,7 +58,35 @@
       }
 
       function scheduleResize() {
-        window.requestAnimationFrame(resizeAutoHeight);
+        window.requestAnimationFrame(function () {
+          resizeAutoHeight();
+          setTopNavOffset();
+        });
+      }
+
+      function setTopNavOffset() {
+        var sidebar = document.querySelector('.sidebar');
+        if (!sidebar) {
+          return;
+        }
+        var navHeight = Math.ceil(sidebar.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--top-nav-offset', navHeight + 'px');
+      }
+
+      function bindTopNavOffsetEvents() {
+        window.addEventListener('load', setTopNavOffset);
+        window.addEventListener('resize', scheduleResize);
+        window.addEventListener('orientationchange', scheduleResize);
+
+        var menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+          menuToggle.addEventListener('change', scheduleResize);
+        }
+
+        var sidebarToggle = document.querySelector('.sidebar-toggle-wrapper');
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener('click', scheduleResize);
+        }
       }
 
       if (document.readyState === 'loading') {
@@ -65,19 +95,7 @@
         scheduleResize();
       }
 
-      window.addEventListener('load', scheduleResize);
-      window.addEventListener('resize', scheduleResize);
-      window.addEventListener('orientationchange', scheduleResize);
-
-      var menuToggle = document.getElementById('menuToggle');
-      if (menuToggle) {
-        menuToggle.addEventListener('change', scheduleResize);
-      }
-
-      var sidebarToggle = document.querySelector('.sidebar-toggle-wrapper');
-      if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', scheduleResize);
-      }
+      bindTopNavOffsetEvents();
     })();
   </script>
 </body>
