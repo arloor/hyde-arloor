@@ -26,14 +26,18 @@
     }
   </script>
   {{ partial "sidebar.html" . }}
-  <div class="content container" data-auto-height="min">
+  <div class="content container">
     {{ block "content" . }}{{ end }}
   </div>
   {{ block "footer" . }}{{ end }}
   <script>
     (function () {
+      var targets = document.querySelectorAll('[data-auto-height]');
+      if (!targets.length) {
+        return;
+      }
+
       function resizeAutoHeight() {
-        var targets = document.querySelectorAll('[data-auto-height]');
         for (var i = 0; i < targets.length; i += 1) {
           var target = targets[i];
           var rect = target.getBoundingClientRect();
