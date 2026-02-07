@@ -105,7 +105,7 @@
   }
 
   html {
-    scroll-padding-top: 2rem;
+    scroll-padding-top: var(--sidebar-height);
   }
 
   .post h1,
@@ -127,13 +127,14 @@
     left: 0;
     right: 0;
     width: 100%;
-    height: auto;
-    min-height: 49px;
+    height: $sidebar-height;
+    min-height: $sidebar-height;
+    max-height: $sidebar-height;
     padding: 0.45rem 1.25rem;
     text-align: left;
     z-index: 1000;
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow-x: hidden;
+    overflow-y: hidden;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
@@ -192,6 +193,7 @@
   .sidebar .container {
     max-width: none;
     width: 100%;
+    height: 100%;
     padding-left: 0;
     padding-right: 0;
     display: flex;
