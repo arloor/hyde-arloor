@@ -30,6 +30,8 @@
 <script>
     (function () {
         var iframeSelector = '.content.container iframe';
+        var rafId = 0;
+        var resizeDebounceTimer = 0;
 
         function resizeIframe() {
             var iframe = document.querySelector(iframeSelector);
@@ -45,7 +47,18 @@
         }
 
         function scheduleResize() {
-            window.requestAnimationFrame(resizeIframe);
+            if (rafId) {
+                return;
+            }
+            rafId = window.requestAnimationFrame(function () {
+                rafId = 0;
+                resizeIframe();
+            });
+        }
+
+        function scheduleResizeDebounced(delay) {
+            window.clearTimeout(resizeDebounceTimer);
+            resizeDebounceTimer = window.setTimeout(scheduleResize, delay || 120);
         }
 
         if (document.readyState === 'loading') {
@@ -55,7 +68,9 @@
 
         window.addEventListener('load', scheduleResize);
         window.addEventListener('pageshow', scheduleResize);
-        window.addEventListener('resize', scheduleResize);
+        window.addEventListener('resize', function () {
+            scheduleResizeDebounced(120);
+        });
 
         var iframe = document.querySelector(iframeSelector);
         if (iframe) {
