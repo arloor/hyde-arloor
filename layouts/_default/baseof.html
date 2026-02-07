@@ -3,107 +3,11 @@
 {{ block "header" . }}{{ end }}
 
 <body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
-  <script>
-    // 检查是否为iframe页面
-    var isIframePage = {{ if eq .Params.type "iframe" }}true{{ else }}false{{ end }};
-
-    if (isIframePage) {
-      // iframe页面自动收起sidebar
-      document.body.classList.add('sidebar-collapsed');
-    } else {
-      // 其他页面根据localStorage决定，默认展开
-      if (localStorage.getItem('sidebar-collapsed') === 'true') {
-        document.body.classList.add('sidebar-collapsed');
-      }
-    }
-
-    function toggleSidebar() {
-      document.body.classList.toggle('sidebar-collapsed');
-      // 只在非iframe页面保存状态
-      if (!isIframePage) {
-        localStorage.setItem('sidebar-collapsed', document.body.classList.contains('sidebar-collapsed'));
-      }
-    }
-  </script>
   {{ partial "sidebar.html" . }}
   <div class="content container">
     {{ block "content" . }}{{ end }}
   </div>
   {{ block "footer" . }}{{ end }}
-  <script>
-    (function () {
-      var targets = document.querySelectorAll('[data-auto-height]');
-      if (!targets.length) {
-        setTopNavOffset();
-        bindTopNavOffsetEvents();
-        return;
-      }
-
-      function resizeAutoHeight() {
-        for (var i = 0; i < targets.length; i += 1) {
-          var target = targets[i];
-          var rect = target.getBoundingClientRect();
-          var top = rect.top;
-          if (top < 0) {
-            top = 0;
-          } else if (top > window.innerHeight) {
-            top = window.innerHeight;
-          }
-          var available = window.innerHeight - top;
-          if (available < 0) {
-            available = 0;
-          }
-
-          var mode = target.getAttribute('data-auto-height');
-          if (mode === 'min') {
-            target.style.minHeight = available + 'px';
-          } else {
-            target.style.height = available + 'px';
-          }
-        }
-      }
-
-      function scheduleResize() {
-        window.requestAnimationFrame(function () {
-          resizeAutoHeight();
-          setTopNavOffset();
-        });
-      }
-
-      function setTopNavOffset() {
-        var sidebar = document.querySelector('.sidebar');
-        if (!sidebar) {
-          return;
-        }
-        var navHeight = Math.ceil(sidebar.getBoundingClientRect().height);
-        document.documentElement.style.setProperty('--top-nav-offset', navHeight + 'px');
-      }
-
-      function bindTopNavOffsetEvents() {
-        window.addEventListener('load', scheduleResize);
-        window.addEventListener('resize', scheduleResize);
-        window.addEventListener('orientationchange', scheduleResize);
-
-        var menuToggle = document.getElementById('menuToggle');
-        if (menuToggle) {
-          menuToggle.addEventListener('change', scheduleResize);
-        }
-
-        var sidebarToggle = document.querySelector('.sidebar-toggle-wrapper');
-        if (sidebarToggle) {
-          sidebarToggle.addEventListener('click', scheduleResize);
-        }
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scheduleResize);
-      } else {
-        scheduleResize();
-      }
-
-      bindTopNavOffsetEvents();
-    })();
-  </script>
 </body>
 
 </html>
