@@ -152,6 +152,14 @@
     max-width: $content-max-width;
   }
 
+  .content.container {
+        width: 100%;
+        height: calc(100vh - var(--sidebar-height, 49px));
+        border: none;
+        display: block;
+        overflow-y: auto;
+  }
+
   .layout-reverse {
     .sidebar {
       left: 0;
