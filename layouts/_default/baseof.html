@@ -10,10 +10,16 @@
 <style>
   .content.container {
         width: 100%;
+        max-width: none;
         height: calc(100vh - var(--sidebar-height, 49px));
         border: none;
         display: block;
         overflow-y: auto;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
+        padding-right: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
   }
 </style>
 <script>
