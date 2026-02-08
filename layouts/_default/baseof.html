@@ -2,7 +2,7 @@
 <html lang="{{ .Site.LanguageCode }}">
 {{ block "header" . }}{{ end }}
 
-<body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
+<body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}} {{if eq .Type "iframe"}}type-iframe{{end}}">
   {{ partial "sidebar.html" . }}
   <div class="content container">
     {{ block "content" . }}{{ end }}
@@ -18,6 +18,9 @@
         box-sizing: border-box;
         margin-left: 0;
         margin-right: 0;
+  }
+
+  body:not(.type-iframe) .content.container {
         padding-left: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
         padding-right: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
   }
