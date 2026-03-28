@@ -11,13 +11,25 @@
   .content.container {
         width: 100%;
         max-width: none;
-        height: calc(100vh - var(--sidebar-height, 49px));
         border: none;
         display: block;
-        overflow-y: auto;
         box-sizing: border-box;
         margin-left: 0;
         margin-right: 0;
+  }
+
+  /* 小屏：内容容器自身滚动 */
+  @media (max-width: 767px) {
+    body:not(.type-iframe) .content.container {
+      height: calc(100vh - var(--sidebar-height, 49px));
+      overflow-y: auto;
+    }
+  }
+
+  /* iframe 页面：始终使用内容容器滚动（全部屏幕尺寸） */
+  body.type-iframe .content.container {
+        height: calc(100vh - var(--sidebar-height, 49px));
+        overflow-y: auto;
   }
 
   body:not(.type-iframe) .content.container {
@@ -27,114 +39,67 @@
 </style>
 <script>
     (function () {
-        var contentSelector = '.content.container';
-        var rafId = 0;
-        var resizeDebounceTimer = 0;
-        var pendingHashScroll = false;
+        var content = document.querySelector('.content.container');
+        if (!content) return;
 
-        function getHashTarget() {
-            var hash = window.location.hash;
-            var targetId = '';
-
-            if (!hash || hash === '#') {
-                return null;
-            }
-
-            targetId = hash.slice(1);
-            try {
-                targetId = decodeURIComponent(targetId);
-            } catch (e) {
-                // Keep raw hash when decode fails.
-            }
-
-            return document.getElementById(targetId);
+        // 小屏(<768px)和 iframe 页面使用内容容器滚动，中大屏让 body 自然滚动
+        function needsContentScroll() {
+            return document.body.classList.contains('type-iframe') ||
+                   window.matchMedia('(max-width: 767px)').matches;
         }
 
-        function scrollToHashTarget() {
-            var target = getHashTarget();
-            if (!target) {
-                return;
-            }
-            try {
-                target.scrollIntoView({ block: 'start', inline: 'nearest' });
-            } catch (e) {
-                target.scrollIntoView(true);
+        // 小屏/iframe：用 getBoundingClientRect().top 获取容器实际渲染位置来精确计算高度，
+        // 比 CSS calc() 更可靠（如 burger 菜单展开后 sidebar 高度会变）。
+        // 中大屏：清除之前可能设过的 style.height（从小屏 resize 到大屏时需要）。
+        function updateHeight() {
+            if (needsContentScroll()) {
+                var available = window.innerHeight - content.getBoundingClientRect().top;
+                content.style.height = Math.max(0, available) + 'px';
+            } else {
+                content.style.height = '';
             }
         }
 
-        function applyPendingHashScroll() {
-            if (!pendingHashScroll) {
-                return;
-            }
-            pendingHashScroll = false;
-            scrollToHashTarget();
+        // 小屏/iframe 的滚动容器是 .content.container 而非 body，
+        // 浏览器原生 hash 定位可能在 JS 设好高度之前就完成，导致位置偏移，
+        // 因此在 updateHeight 后手动修正。中大屏由浏览器原生 + scroll-padding-top 处理。
+        function scrollToHash() {
+            if (!needsContentScroll() || !location.hash || location.hash === '#') return;
+            var id = location.hash.slice(1);
+            try { id = decodeURIComponent(id); } catch (e) {}
+            var el = document.getElementById(id);
+            if (el) try { el.scrollIntoView({ block: 'start', inline: 'nearest' }); } catch (e) { el.scrollIntoView(true); }
         }
 
-        function resizeContentHeight() {
-            var content = document.querySelector(contentSelector);
-            if (!content) {
-                return;
-            }
-            var rect = content.getBoundingClientRect();
-            var available = window.innerHeight - rect.top;
-            if (available < 0) {
-                available = 0;
-            }
-            content.style.height = available + 'px';
-            applyPendingHashScroll();
-        }
+        function init() { updateHeight(); scrollToHash(); }
 
-        function scheduleResize() {
-            if (rafId) {
-                return;
-            }
-            rafId = window.requestAnimationFrame(function () {
-                rafId = 0;
-                resizeContentHeight();
-            });
-        }
-
-        function scheduleResizeDebounced(delay) {
-            window.clearTimeout(resizeDebounceTimer);
-            resizeDebounceTimer = window.setTimeout(scheduleResize, delay || 120);
-        }
-
-        function requestHashScroll() {
-            if (!window.location.hash || window.location.hash === '#') {
-                return;
-            }
-            pendingHashScroll = true;
-            scheduleResize();
-        }
-
+        // DOMContentLoaded：DOM 就绪后立即算高度
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function () {
-                scheduleResize();
-                requestHashScroll();
-            }, { once: true });
+            document.addEventListener('DOMContentLoaded', init, { once: true });
         } else {
-            scheduleResize();
-            requestHashScroll();
+            init();
         }
+        // load：图片等资源加载完后再算一次，图片会撑高内容影响 getBoundingClientRect().top
+        window.addEventListener('load', init);
+        // pageshow：前进/后退走 bfcache 时不触发 load，只触发 pageshow
+        window.addEventListener('pageshow', init);
+        // hashchange：页面内点击锚点链接时修正滚动位置
+        window.addEventListener('hashchange', scrollToHash);
 
-        window.addEventListener('load', function () {
-            scheduleResize();
-            requestHashScroll();
-        });
-        window.addEventListener('pageshow', function () {
-            scheduleResize();
-            requestHashScroll();
-        });
-        window.addEventListener('hashchange', requestHashScroll);
+        // resize：窗口大小变化时重算高度，同时处理跨越 768px 断点的情况
+        var resizeTimer;
         window.addEventListener('resize', function () {
-            scheduleResizeDebounced(120);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateHeight, 120);
         });
 
+        // menuToggle：移动端 burger 菜单展开/收起时 sidebar 高度变化需重算；
+        // 250ms 延迟是等待 CSS 过渡动画完成
         var menuToggle = document.getElementById('menuToggle');
         if (menuToggle) {
             menuToggle.addEventListener('change', function () {
-                scheduleResize();
-                window.setTimeout(scheduleResize, 250);
+                updateHeight();
+                setTimeout(updateHeight, 250);
             });
         }
     })();
