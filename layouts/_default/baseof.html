@@ -18,11 +18,12 @@
         margin-right: 0;
   }
 
-  /* 小屏：内容容器自身滚动 */
+  /* 小屏：内容容器自身滚动；scroll-padding-top 让锚点定位后标题离顶部留有空隙 */
   @media (max-width: 767px) {
     body:not(.type-iframe) .content.container {
       height: calc(100vh - var(--sidebar-height, 49px));
       overflow-y: auto;
+      scroll-padding-top: 1rem;
     }
   }
 
