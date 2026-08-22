@@ -29,6 +29,9 @@
   }
 
   .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     margin: 0;
     padding: 0;
   }
@@ -104,10 +107,6 @@
     font-size: $small-device-font-size;
   }
 
-  html {
-    scroll-padding-top: var(--sidebar-height);
-  }
-
   .post h1,
   .post h2,
   .post h3,
@@ -126,15 +125,14 @@
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
+    width: 100vw;
     height: $sidebar-height;
     min-height: $sidebar-height;
     max-height: $sidebar-height;
     padding: 0.45rem 1.25rem;
     text-align: left;
     z-index: 1000;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: visible;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
@@ -202,6 +200,8 @@
     gap: 1.25rem;
     flex-wrap: nowrap;
     min-width: max-content;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .sidebar-about {

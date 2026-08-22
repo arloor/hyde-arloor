@@ -18,94 +18,31 @@
         margin-right: 0;
   }
 
-  /* 小屏：内容容器自身滚动；scroll-padding-top 让锚点定位后标题离顶部留有空隙 */
-  @media (max-width: 767px) {
-    body:not(.type-iframe) .content.container {
-      height: calc(100vh - var(--sidebar-height, 49px));
-      overflow-y: auto;
-      scroll-padding-top: 1rem;
-    }
-  }
-
-  /* iframe 页面：始终使用内容容器滚动（全部屏幕尺寸） */
-  body.type-iframe .content.container {
-        height: calc(100vh - var(--sidebar-height, 49px));
-        overflow-y: auto;
-  }
-
   body:not(.type-iframe) .content.container {
         padding-left: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
         padding-right: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
   }
+
+  /* iframe 页：顶栏自然高度，剩余视口交给 iframe，不再用 JS 量高 */
+  body.type-iframe {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        overflow: hidden;
+  }
+
+  body.type-iframe .sidebar {
+        flex: 0 0 auto;
+  }
+
+  body.type-iframe .content.container {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        padding: 0;
+  }
 </style>
-<script>
-    (function () {
-        var content = document.querySelector('.content.container');
-        if (!content) return;
-
-        // 小屏(<768px)和 iframe 页面使用内容容器滚动，中大屏让 body 自然滚动
-        function needsContentScroll() {
-            return document.body.classList.contains('type-iframe') ||
-                   window.matchMedia('(max-width: 767px)').matches;
-        }
-
-        // 小屏/iframe：用 getBoundingClientRect().top 获取容器实际渲染位置来精确计算高度，
-        // 比 CSS calc() 更可靠（如 burger 菜单展开后 sidebar 高度会变）。
-        // 中大屏：清除之前可能设过的 style.height（从小屏 resize 到大屏时需要）。
-        function updateHeight() {
-            if (needsContentScroll()) {
-                var available = window.innerHeight - content.getBoundingClientRect().top;
-                content.style.height = Math.max(0, available) + 'px';
-            } else {
-                content.style.height = '';
-            }
-        }
-
-        // 小屏/iframe 的滚动容器是 .content.container 而非 body，
-        // 浏览器原生 hash 定位可能在 JS 设好高度之前就完成，导致位置偏移，
-        // 因此在 updateHeight 后手动修正。中大屏由浏览器原生 + scroll-padding-top 处理。
-        function scrollToHash() {
-            if (!needsContentScroll() || !location.hash || location.hash === '#') return;
-            var id = location.hash.slice(1);
-            try { id = decodeURIComponent(id); } catch (e) {}
-            var el = document.getElementById(id);
-            if (el) try { el.scrollIntoView({ block: 'start', inline: 'nearest' }); } catch (e) { el.scrollIntoView(true); }
-        }
-
-        function init() { updateHeight(); scrollToHash(); }
-
-        // DOMContentLoaded：DOM 就绪后立即算高度
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init, { once: true });
-        } else {
-            init();
-        }
-        // load：图片等资源加载完后再算一次，图片会撑高内容影响 getBoundingClientRect().top
-        window.addEventListener('load', init);
-        // pageshow：前进/后退走 bfcache 时不触发 load，只触发 pageshow
-        window.addEventListener('pageshow', init);
-        // hashchange：页面内点击锚点链接时修正滚动位置
-        window.addEventListener('hashchange', scrollToHash);
-
-        // resize：窗口大小变化时重算高度，同时处理跨越 768px 断点的情况
-        var resizeTimer;
-        window.addEventListener('resize', function () {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(updateHeight, 120);
-        });
-
-        // menuToggle：移动端 burger 菜单展开/收起时 sidebar 高度变化需重算；
-        // 250ms 延迟是等待 CSS 过渡动画完成
-        var menuToggle = document.getElementById('menuToggle');
-        if (menuToggle) {
-            menuToggle.addEventListener('change', function () {
-                updateHeight();
-                setTimeout(updateHeight, 250);
-            });
-        }
-    })();
-</script>
-  {{ block "footer" . }}{{ end }}
+{{ block "footer" . }}{{ end }}
 </body>
 
 </html>
