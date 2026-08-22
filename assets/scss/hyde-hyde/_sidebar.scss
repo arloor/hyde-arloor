@@ -8,8 +8,11 @@
   text-align: center;
   transition: transform 0.3s ease;
 
-  // 用 box-shadow 把背景铺进右侧 scrollbar-gutter。
-  // 不要用 width: 100vw + html overflow-x:hidden：根元素会变成异常滚动容器，滚轮失效。
+  // 顶栏按视口宽度铺开（含右侧 scrollbar-gutter），避免预留滚动槽露出页面底色。
+  // 不能用 100vw 居中：stable gutter 只在右侧，居中只能盖住一半。
+  width: 100vw;
+  max-width: 100vw;
+
   &::before {
     content: "";
     position: absolute;
@@ -17,10 +20,9 @@
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    width: 100vw;
     pointer-events: none;
     background-color: inherit;
-    box-shadow: 100vw 0 0 $sidebar-color;
   }
 
   a {
