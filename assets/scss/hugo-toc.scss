@@ -218,3 +218,17 @@
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
 }
+
+// Inline code inside TOC links should inherit TOC typography (matching heading code reset)
+.toc-mobile__body code,
+.toc-desktop__nav code,
+.toc-wrapper code {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
