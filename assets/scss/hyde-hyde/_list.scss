@@ -34,6 +34,8 @@
   padding: 1.05rem 1.4rem;
   border-radius: 13px;
   background-color: var(--bg-card);
+  backdrop-filter: var(--card-backdrop);
+  -webkit-backdrop-filter: var(--card-backdrop);
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
   overflow: hidden;
@@ -184,6 +186,8 @@ ul.posts {
   padding: 0.5rem;
   border-radius: 14px;
   background-color: var(--bg-card);
+  backdrop-filter: var(--card-backdrop);
+  -webkit-backdrop-filter: var(--card-backdrop);
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
 

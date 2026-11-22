@@ -111,24 +111,30 @@ $ribbon-background-color: #3b82f6;
   --toc-gap: 1.5rem;
 
   // Layered Surfaces
-  --bg-page: #f4f6fa;
-  --bg-card: #ffffff;
-  --bg-surface: #f8fafc;
-  --bg-surface-hover: #eef2f7;
-  --bg-navbar: rgba(255, 255, 255, 0.78);
-  --bg-drawer: #ffffff;
+  --bg-page: #edf2f9;
+  --bg-card: rgba(255, 255, 255, 0.84);
+  --bg-card-article: rgba(255, 255, 255, 0.90);
+  --bg-surface: rgba(248, 250, 252, 0.85);
+  --bg-surface-hover: #e8eef7;
+  --bg-navbar: rgba(255, 255, 255, 0.74);
+  --bg-drawer: rgba(255, 255, 255, 0.96);
+  --card-backdrop: blur(12px) saturate(145%);
 
-  // Ambient Aurora & Dot Grid
-  --aurora-1: rgba(59, 130, 246, 0.11);
-  --aurora-2: rgba(99, 102, 241, 0.09);
-  --aurora-3: rgba(6, 182, 212, 0.07);
-  --grid-dot: rgba(15, 23, 42, 0.07);
+  // Full-Viewport Ambient Aurora & Blueprint Grid
+  --aurora-1: rgba(59, 130, 246, 0.20);
+  --aurora-2: rgba(99, 102, 241, 0.17);
+  --aurora-3: rgba(6, 182, 212, 0.15);
+  --aurora-4: rgba(168, 85, 247, 0.12);
+  --grid-line: rgba(15, 23, 42, 0.045);
+  --grid-line-major: rgba(15, 23, 42, 0.075);
+  --grid-dot: rgba(37, 99, 235, 0.26);
+  --bg-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
 
   // Borders
   --border-subtle: rgba(15, 23, 42, 0.08);
   --border-card: rgba(15, 23, 42, 0.09);
   --border-strong: rgba(15, 23, 42, 0.16);
-  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.92);
 
   // Text
   --text-primary: #0f172a;
@@ -187,8 +193,8 @@ $ribbon-background-color: #3b82f6;
 
   // Shadows
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px -4px rgba(15, 23, 42, 0.06);
-  --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 14px 32px -8px rgba(37, 99, 235, 0.12);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 20px -6px rgba(15, 23, 42, 0.07), var(--card-inset-highlight);
+  --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 14px 32px -8px rgba(37, 99, 235, 0.14), var(--card-inset-highlight);
   --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
   --shadow-nav: 0 1px 0 rgba(15, 23, 42, 0.06), 0 4px 20px rgba(15, 23, 42, 0.03);
 
@@ -205,24 +211,30 @@ html[data-theme="dark"] {
   color-scheme: dark;
 
   // Layered Surfaces
-  --bg-page: #070b14;
-  --bg-card: #0e1526;
-  --bg-surface: #131c31;
+  --bg-page: #060a14;
+  --bg-card: rgba(14, 21, 38, 0.76);
+  --bg-card-article: rgba(13, 20, 36, 0.85);
+  --bg-surface: rgba(19, 28, 49, 0.8);
   --bg-surface-hover: #1b2640;
-  --bg-navbar: rgba(7, 11, 20, 0.78);
-  --bg-drawer: #0c1222;
+  --bg-navbar: rgba(6, 10, 20, 0.74);
+  --bg-drawer: rgba(12, 18, 34, 0.96);
+  --card-backdrop: blur(12px) saturate(150%);
 
-  // Ambient Aurora & Dot Grid
-  --aurora-1: rgba(56, 189, 248, 0.13);
-  --aurora-2: rgba(99, 102, 241, 0.16);
-  --aurora-3: rgba(139, 92, 246, 0.1);
-  --grid-dot: rgba(148, 163, 184, 0.11);
+  // Full-Viewport Ambient Aurora & Blueprint Grid
+  --aurora-1: rgba(56, 189, 248, 0.21);
+  --aurora-2: rgba(99, 102, 241, 0.25);
+  --aurora-3: rgba(16, 185, 129, 0.13);
+  --aurora-4: rgba(139, 92, 246, 0.19);
+  --grid-line: rgba(148, 163, 184, 0.055);
+  --grid-line-major: rgba(148, 163, 184, 0.105);
+  --grid-dot: rgba(96, 165, 250, 0.36);
+  --bg-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
 
   // Borders
   --border-subtle: rgba(148, 163, 184, 0.12);
-  --border-card: rgba(148, 163, 184, 0.13);
-  --border-strong: rgba(148, 163, 184, 0.24);
-  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --border-card: rgba(148, 163, 184, 0.15);
+  --border-strong: rgba(148, 163, 184, 0.25);
+  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
 
   // Text
   --text-primary: #f1f5f9;

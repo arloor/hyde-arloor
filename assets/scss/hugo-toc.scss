@@ -110,6 +110,8 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     background-color: var(--bg-card);
+    backdrop-filter: var(--card-backdrop);
+    -webkit-backdrop-filter: var(--card-backdrop);
     border: 1px solid var(--border-card);
     border-radius: 13px;
     padding: 13px 12px 13px 14px;

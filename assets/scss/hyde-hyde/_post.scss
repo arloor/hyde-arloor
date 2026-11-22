@@ -10,7 +10,9 @@
 .post-article {
   min-width: 0;
   width: 100%;
-  background-color: var(--bg-card);
+  background-color: var(--bg-card-article);
+  backdrop-filter: var(--card-backdrop);
+  -webkit-backdrop-filter: var(--card-backdrop);
   border: 1px solid var(--border-card);
   border-radius: 14px;
   padding: 1.35rem 2.2rem;
