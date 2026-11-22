@@ -1,0 +1,4 @@
+{{- /* 强制浏览器下载而非在线打开，并用指定文件名（默认取 URL 末段）保存 */ -}}
+{{- $href := .Get "href" -}}
+{{- $name := .Get "name" | default (path.Base $href) -}}
+<a href="{{ $href }}" download="{{ $name }}">{{ .Inner | markdownify }}</a>

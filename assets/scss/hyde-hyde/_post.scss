@@ -24,15 +24,29 @@
   }
 }
 
-// Wide desktop 2-column layout with sticky right TOC card
+// Wide desktop layout with sticky right TOC card
+// Keep the article itself centered in the viewport on wide screens rather than centering (article + TOC) together
 // Inner .post width matches original 56rem (~1064px at 19px)
 @media (min-width: 1280px) {
   .post-layout--has-toc {
     display: grid;
-    grid-template-columns: minmax(0, calc(var(--content-max-width, 56rem) + 4.4rem)) var(--toc-width, 240px);
-    gap: var(--toc-gap, 1.5rem);
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, calc(var(--content-max-width, 56rem) + 4.4rem))
+      minmax(calc(var(--toc-width, 240px) + var(--toc-gap, 1.5rem)), 1fr);
+    column-gap: 0;
     align-items: start;
-    justify-content: center;
+
+    > .post-article {
+      grid-column: 2;
+    }
+
+    > .toc-desktop {
+      grid-column: 3;
+      justify-self: start;
+      width: var(--toc-width, 240px);
+      margin-left: var(--toc-gap, 1.5rem);
+    }
   }
 }
 

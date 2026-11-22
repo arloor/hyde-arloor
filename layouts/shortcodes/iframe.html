@@ -1,0 +1,80 @@
+{{/*
+  iframe shortcode：在文章中嵌入 HTML 页面。
+
+  参数：
+    src    (必填)  iframe 地址。同站路径（如 /loadgen/xxx.html，文件放 static/ 下）支持自动量高；
+                   跨域 URL 无法读取内容高度，将保持 height 固定值（且对方站点可能拒绝被嵌）。
+    title  (可选)  无障碍标题，默认 "iframe"。
+    height (可选)  初始/回退高度，默认 700px；fixed 模式下即最终高度。
+    fixed  (可选)  "true" 时关闭自动量高。适用于 100vh 布局的页面（如 Grafana 面板）——
+                   这类页面高度跟随 iframe 视口，自动量高会把它压成一条缝。
+
+  自动量高原理（fixed 未开启时）：
+    - 量高时先把 iframe 收缩到 10px，再读文档 scrollHeight，排除视口高度对文档高度的干扰
+      （scrollHeight = max(内容高度, 视口高度)，不收缩量到的只是视口高度）；
+    - load、窗口 resize（宽度变化时内容可能响应式重排）、内容尺寸变化（ResizeObserver，
+      覆盖异步渲染后长高的情况）时重新量高；
+    - 跨域时访问 contentDocument 抛异常，catch 中回退到 height 固定值。
+*/}}
+{{- $src := .Get "src" -}}
+{{- $height := .Get "height" | default "700px" -}}
+{{- $title := .Get "title" | default "iframe" -}}
+{{- $fixed := .Get "fixed" | default "false" -}}
+{{- $id := printf "hugo-iframe-%d" .Ordinal -}}
+<iframe id="{{ $id }}" src="{{ $src }}" title="{{ $title }}" frameborder="0" allowfullscreen scrolling="no"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-storage-access-by-user-activation allow-modals"
+    style="width: 100%; height: {{ $height }}; border: none; display: block; overflow: hidden;">
+</iframe>
+{{ if ne $fixed "true" }}
+<script>
+(function () {
+  var f = document.getElementById('{{ $id }}');
+  if (!f) return;
+  var FALLBACK = '{{ $height }}'; // 量高失败（跨域/异常）时的回退高度
+  var timer = null;
+  var lastWidth = 0;
+
+  // 先收缩再量高，结果写入 iframe style；失败则回退固定高度
+  function measure() {
+    try {
+      var d = f.contentDocument; // 跨域访问在此抛 SecurityError
+      f.style.height = '10px';
+      requestAnimationFrame(function () {
+        try {
+          var h = d.documentElement.scrollHeight;
+          f.style.height = (h > 20 ? h : parseInt(FALLBACK, 10)) + 'px';
+        } catch (e) {
+          f.style.height = FALLBACK;
+        }
+      });
+    } catch (e) {
+      f.style.height = FALLBACK;
+    }
+  }
+
+  // 去抖后量高，避免 load/resize/ResizeObserver 连续触发造成闪烁
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(measure, 120);
+  }
+
+  f.addEventListener('load', function () {
+    schedule();
+    // 内容异步长高/变矮（如延迟渲染的图表）时重测。
+    // 量高本身不会改变内容固有高度（100vh 页面请用 fixed 模式），不会形成观察-修改循环。
+    try {
+      new ResizeObserver(schedule).observe(f.contentDocument.body);
+    } catch (e) { /* 跨域时忽略，保持固定高度 */ }
+  });
+
+  // 窗口宽度变化 → iframe 变宽/变窄 → 内容可能重排改变高度，需要重测；宽度未变则跳过
+  window.addEventListener('resize', function () {
+    var w = f.clientWidth;
+    if (w !== lastWidth) {
+      lastWidth = w;
+      schedule();
+    }
+  });
+})();
+</script>
+{{ end }}

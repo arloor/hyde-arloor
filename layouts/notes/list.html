@@ -1,0 +1,21 @@
+{{ define "header" }}
+    {{ partial "header.html" . }}
+{{ end }}
+
+{{ define "content" }}
+    <span class="section__title">{{ .Title }}</span>
+    {{ with .Content }}
+        <div class="post">
+            {{ . }}
+        </div>
+    {{ end }}
+    <ul class="posts">
+        {{ with .Pages.ByDate.Reverse }}
+            {{ partial "posts-list.html" . }}
+        {{ end }}
+    </ul>
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "page-list/footer.html" . }}
+{{ end }}

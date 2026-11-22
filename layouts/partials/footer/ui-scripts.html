@@ -119,10 +119,15 @@
         activeLink = link;
         if (activeLink) {
           activeLink.classList.add('is-active');
-          var tocRect = tocDesktop.getBoundingClientRect();
-          var linkRect = activeLink.getBoundingClientRect();
-          if (linkRect.top < tocRect.top + 24 || linkRect.bottom > tocRect.bottom - 24) {
-            activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          if (tocDesktop.clientHeight > 0 && tocDesktop.scrollHeight > tocDesktop.clientHeight) {
+            var tocRect = tocDesktop.getBoundingClientRect();
+            var linkRect = activeLink.getBoundingClientRect();
+            var pad = 24;
+            if (linkRect.top < tocRect.top + pad) {
+              tocDesktop.scrollTop -= (tocRect.top + pad - linkRect.top);
+            } else if (linkRect.bottom > tocRect.bottom - pad) {
+              tocDesktop.scrollTop += (linkRect.bottom - (tocRect.bottom - pad));
+            }
           }
         }
       };

@@ -1,0 +1,30 @@
+{{ define "header" }}
+    {{ partial "header.html" . }}
+{{ end }}
+
+{{ define "content" }}
+    <span class="section__title">{{ .Title }}</span>
+    <ul class="posts">
+        {{ if eq .Kind "taxonomy" }}
+            {{ range .Data.Terms.Alphabetical }}
+                {{ $pages := where .Pages "Section" "ne" "notes" }}
+                {{ if and (gt (len $pages) 0) (ne (lower .Page.Title) "undefined") }}
+                    <li>
+                      <span class="list__title--small">
+                        <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+                        <time class="pull-right hidden-tablet">{{ len $pages }}</time>
+                      </span>
+                    </li>
+                {{ end }}
+            {{ end }}
+        {{ else }}
+            {{ with (where .Data.Pages "Section" "ne" "notes").ByDate.Reverse }}
+                {{ partial "posts-list.html" . }}
+            {{ end }}
+        {{ end }}
+    </ul>
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "page-list/footer.html" . }}
+{{ end }}
