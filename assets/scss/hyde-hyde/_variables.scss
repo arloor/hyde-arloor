@@ -1,84 +1,72 @@
-$gray-0: #fafafa;
-$gray-1: #f9f9f9;
-$gray-2: #eee;
-$gray-3: #ddd;
-$gray-4: #ccc;
-$gray-5: #bbb;
-$gray-6: #878787;
-$gray-7: #767676;
-$gray-8: #515151;
-$gray-9: #313131;
+// =============================================================================
+// Design Tokens & Theme Variables (Linear / Vercel Engineering Aesthetic)
+// =============================================================================
 
-$white: #fff;
-$red: #ac4142;
-$orange: #d28445;
-$yellow: #f4bf75;
-$green: #90a959;
-$cyan: #75b5aa;
-$blue: #268bd2;
+$gray-0: #f8fafc;
+$gray-1: #f1f5f9;
+$gray-2: #e2e8f0;
+$gray-3: #cbd5e1;
+$gray-4: #94a3b8;
+$gray-5: #64748b;
+$gray-6: #475569;
+$gray-7: #334155;
+$gray-8: #1e293b;
+$gray-9: #0f172a;
+
+$white: #ffffff;
+$red: #ef4444;
+$orange: #f97316;
+$yellow: #eab308;
+$green: #22c55e;
+$cyan: #06b6d4;
+$blue: #2563eb;
 $brown: #8f5536;
 
-//https://www.client9.com/css-system-font-stack-sans-serif-v3
+// Font Stacks (restored to match original theme)
 $root-font-family: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Droid Sans", "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$code-font-family: "SFMono-Regular", "SF-Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Roboto Mono", "Ubuntu Mono", "Courier New", Courier, monospace;
 
-// poole's variables
+// Typography Scale (exact match to original 17px small / 19px large desktop)
 $root-font-size: 17px;
 $root-font-weight: 400;
-// golden ratio https://grtcalculator.com
-// 18px @ 33 px, 20px @ 33 px ~ 1.667em
-$root-line-height: 1.667em;
-
-$body-color: $gray-8;
-$body-bg: #fff;
-
-$border-color: #e5e5e5;
+$root-line-height: 1.667;
 
 $large-breakpoint: 38em;
 $large-font-size: 19px;
-$font-scale-dot7: .7rem;
-$font-scale-dot8: .8rem;
-//
-
-// hyde-hyde
 $small-device-font-size: $root-font-size;
 $large-device-font-size: $large-font-size;
+$font-scale-dot7: 0.7rem;
+$font-scale-dot8: 0.8rem;
 
-// https://www.client9.com/css-system-font-stack-monospace-v2
-$code-font-family: "SFMono-Regular", "SF-Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Roboto Mono", "Ubuntu Mono", "Courier New", Courier, monospace;
+// Legacy Sass variables kept for downstream compatibility
+$body-color: $gray-7;
+$body-bg: #f5f7fb;
+$border-color: $gray-2;
+
 $code-font-size: 1rem;
-$code-fence-font-size: .8rem;
-//$code-color: #bf616a;
-//$code-background-color: #f9f2f4;
-$code-line-height: 1.4;
+$code-fence-font-size: 0.8rem;
+$code-line-height: 1.667;
 
-// links
 $link-color: $blue;
-$link-hover-color: $body-color;
+$link-hover-color: #1d4ed8;
 
-// section
 $section__title-font-size: 2.15rem;
-
-// post
 $post__subtitle-font-size: 1.5rem;
-$gradient-color-1: #ff2c2c;
-$gradient-color-2: #7a5e91;
+$gradient-color-1: #2563eb;
+$gradient-color-2: #6366f1;
 
-// post meta
-$meta-font-size: $font-scale-dot8;
-$meta-font-weight: 300;
-$meta-color: $gray-6;
+$meta-font-size: 0.8rem;
+$meta-font-weight: 400;
+$meta-color: $gray-5;
 
-// post tags
-$tag-background-color: $gray-2;
-$tag-color: #606570;
-$tag-font-size: .667rem;
+$tag-background-color: $gray-1;
+$tag-color: $gray-6;
+$tag-font-size: 0.667rem;
 
-// list of posts
-$item__date-color: #9a9a9a;
-$item__date-font-size: 1rem;
-$item__title-big-font-size: 1.785rem;
+$item__date-color: $gray-5;
+$item__date-font-size: 0.85rem;
+$item__title-big-font-size: 1.55rem;
 
-// heading
 $heading-font-weight: 400;
 $h1-font-size: 2.15rem;
 $h1-line-height: 1.25;
@@ -87,27 +75,218 @@ $h3-font-size: 1.5rem;
 $h4-font-size: 1.3rem;
 $h5-font-size: 1rem;
 
-
-// sidebar
-$sidebar-color: #300030;
+// Layout dimensions
+$sidebar-color: #ffffff;
 $sidebar-width: 16rem;
-$sidebar-height: 2.5rem;
-$site__title-font-size: 2.5rem;
-$copyright-font-size: $font-scale-dot7;
+$sidebar-height: 56px;
+$site__title-font-size: 1.125rem;
+$copyright-font-size: 0.78rem;
 
-// content
-$content-max-width: 56rem; // @ ~70 CPL
-$content-margin-left: $sidebar-width + 2rem;
-$content-margin-right: 2rem;
+$content-max-width: 56rem; // Restored to original 56rem (~1064px at 19px)
+$content-margin-left: 0;
+$content-margin-right: 0;
 
-// navigation
-$navigation-color: #c2255c;
+$navigation-color: $blue;
 
-// portfolio
+// Portfolio
 $project__title-font-size: $h2-font-size;
 $project__subtitle-font-size-big: $h3-font-size;
 $project__subtitle-font-size-small: $h4-font-size;
 $project__subtitle-font-style: italic;
-$project__subtitle-color: #778492;
-$ribbon-color: #276582;
-$ribbon-background-color: #479fc8;
+$project__subtitle-color: $gray-5;
+$ribbon-color: #1d4ed8;
+$ribbon-background-color: #3b82f6;
+
+// =============================================================================
+// CSS Custom Properties (Light Theme Default — Linear / Vercel Engineering)
+// =============================================================================
+
+:root {
+  color-scheme: light;
+
+  --navbar-height: #{$sidebar-height};
+  --sidebar-height: #{$sidebar-height};
+  --content-max-width: #{$content-max-width};
+  --toc-width: 240px;
+  --toc-gap: 1.5rem;
+
+  // Layered Surfaces
+  --bg-page: #f4f6fa;
+  --bg-card: #ffffff;
+  --bg-surface: #f8fafc;
+  --bg-surface-hover: #eef2f7;
+  --bg-navbar: rgba(255, 255, 255, 0.78);
+  --bg-drawer: #ffffff;
+
+  // Ambient Aurora & Dot Grid
+  --aurora-1: rgba(59, 130, 246, 0.11);
+  --aurora-2: rgba(99, 102, 241, 0.09);
+  --aurora-3: rgba(6, 182, 212, 0.07);
+  --grid-dot: rgba(15, 23, 42, 0.07);
+
+  // Borders
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-card: rgba(15, 23, 42, 0.09);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  // Text
+  --text-primary: #0f172a;
+  --text-body: #334155;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  // Accent & Gradients
+  --accent: #2563eb;
+  --accent-indigo: #4f46e5;
+  --accent-cyan: #0891b2;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --accent-border: rgba(59, 130, 246, 0.38);
+  --accent-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 60%, #0891b2 100%);
+  --progress-gradient: linear-gradient(90deg, #2563eb 0%, #6366f1 55%, #06b6d4 100%);
+
+  // Badges
+  --badge-cat-bg: rgba(79, 70, 229, 0.09);
+  --badge-cat-border: rgba(79, 70, 229, 0.18);
+  --badge-cat-text: #4338ca;
+  --badge-cat-hover-bg: rgba(79, 70, 229, 0.16);
+  --badge-tag-bg: #f1f5f9;
+  --badge-tag-border: rgba(15, 23, 42, 0.06);
+  --badge-tag-text: #475569;
+  --badge-tag-hover-bg: #e2e8f0;
+  --badge-tag-hover-text: #0f172a;
+
+  // Code (IDE Window — restored original inline #ab5979 berry-rose tone)
+  --code-inline-bg: rgba(171, 89, 121, 0.07);
+  --code-inline-border: rgba(171, 89, 121, 0.16);
+  --code-inline-text: #ab5979;
+  --code-header-bg: #181e2c;
+  --code-block-bg: #0f1420;
+  --code-block-border: #252e42;
+  --code-block-shadow: 0 12px 30px -12px rgba(15, 23, 42, 0.3), 0 2px 6px rgba(15, 23, 42, 0.08);
+
+  // Callouts & Blockquotes
+  --quote-bg: #f8fafc;
+  --quote-border: #4f46e5;
+  --quote-text: #475569;
+  --important-bg: #fefce8;
+  --important-border: #eab308;
+  --warning-bg: #fef2f2;
+  --warning-border: #ef4444;
+
+  // Tables
+  --table-header-bg: #f8fafc;
+  --table-stripe-bg: rgba(248, 250, 252, 0.7);
+  --table-hover-bg: #f1f5f9;
+
+  // Kbd
+  --kbd-bg: #ffffff;
+  --kbd-border: #cbd5e1;
+  --kbd-shadow: #cbd5e1;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px -4px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 14px 32px -8px rgba(37, 99, 235, 0.12);
+  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-nav: 0 1px 0 rgba(15, 23, 42, 0.06), 0 4px 20px rgba(15, 23, 42, 0.03);
+
+  // Selection
+  --selection-bg: rgba(79, 70, 229, 0.15);
+  --selection-text: #0f172a;
+}
+
+// =============================================================================
+// Dark Theme (Deep Obsidian Linear Palette)
+// =============================================================================
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  // Layered Surfaces
+  --bg-page: #070b14;
+  --bg-card: #0e1526;
+  --bg-surface: #131c31;
+  --bg-surface-hover: #1b2640;
+  --bg-navbar: rgba(7, 11, 20, 0.78);
+  --bg-drawer: #0c1222;
+
+  // Ambient Aurora & Dot Grid
+  --aurora-1: rgba(56, 189, 248, 0.13);
+  --aurora-2: rgba(99, 102, 241, 0.16);
+  --aurora-3: rgba(139, 92, 246, 0.1);
+  --grid-dot: rgba(148, 163, 184, 0.11);
+
+  // Borders
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --border-card: rgba(148, 163, 184, 0.13);
+  --border-strong: rgba(148, 163, 184, 0.24);
+  --card-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  // Text
+  --text-primary: #f1f5f9;
+  --text-body: #cbd5e1;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  // Accent & Gradients
+  --accent: #60a5fa;
+  --accent-indigo: #818cf8;
+  --accent-cyan: #22d3ee;
+  --accent-hover: #93c5fd;
+  --accent-soft: rgba(96, 165, 250, 0.13);
+  --accent-border: rgba(96, 165, 250, 0.4);
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 60%, #06b6d4 100%);
+  --progress-gradient: linear-gradient(90deg, #38bdf8 0%, #818cf8 55%, #c084fc 100%);
+
+  // Badges
+  --badge-cat-bg: rgba(129, 140, 248, 0.14);
+  --badge-cat-border: rgba(129, 140, 248, 0.28);
+  --badge-cat-text: #a5b4fc;
+  --badge-cat-hover-bg: rgba(129, 140, 248, 0.24);
+  --badge-tag-bg: rgba(30, 41, 59, 0.85);
+  --badge-tag-border: rgba(148, 163, 184, 0.14);
+  --badge-tag-text: #cbd5e1;
+  --badge-tag-hover-bg: #26344f;
+  --badge-tag-hover-text: #f8fafc;
+
+  // Code (IDE Window — dark mode counterpart of #ab5979)
+  --code-inline-bg: rgba(224, 141, 172, 0.12);
+  --code-inline-border: rgba(224, 141, 172, 0.22);
+  --code-inline-text: #e08dac;
+  --code-header-bg: #131a2c;
+  --code-block-bg: #090e1a;
+  --code-block-border: rgba(148, 163, 184, 0.16);
+  --code-block-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  // Callouts & Blockquotes
+  --quote-bg: rgba(19, 28, 49, 0.72);
+  --quote-border: #818cf8;
+  --quote-text: #cbd5e1;
+  --important-bg: rgba(234, 179, 8, 0.1);
+  --important-border: #eab308;
+  --warning-bg: rgba(239, 68, 68, 0.1);
+  --warning-border: #f87171;
+
+  // Tables
+  --table-header-bg: #131c31;
+  --table-stripe-bg: rgba(19, 28, 49, 0.45);
+  --table-hover-bg: rgba(30, 41, 59, 0.68);
+
+  // Kbd
+  --kbd-bg: #131c31;
+  --kbd-border: #334155;
+  --kbd-shadow: #070b14;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -6px rgba(0, 0, 0, 0.45), var(--card-inset-highlight);
+  --shadow-card-hover: 0 8px 24px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--accent-border), var(--card-inset-highlight);
+  --shadow-md: 0 12px 32px -6px rgba(0, 0, 0, 0.6);
+  --shadow-nav: 0 1px 0 rgba(148, 163, 184, 0.1), 0 6px 24px rgba(0, 0, 0, 0.35);
+
+  // Selection
+  --selection-bg: rgba(129, 140, 248, 0.28);
+  --selection-text: #f8fafc;
+}

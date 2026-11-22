@@ -1,11 +1,8 @@
 // Body resets
-//
-// Update the foundational and global aspects of the page.
-
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
@@ -18,28 +15,30 @@ html {
   font-family: $root-font-family;
   font-size: $root-font-size;
   line-height: $root-line-height;
-
-  @media (min-width: $large-breakpoint) {
-    font-size: $large-font-size;
-  }
 }
 
 body {
-  color: $body-color;
-  background-color: $body-bg;
+  color: var(--text-body);
+  background-color: var(--bg-page);
   -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-// No `:visited` state is required by default (browsers will use `a`)
-a {
-  color: $link-color;
-  text-decoration: none;
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
 
-  // `:focus` is linked to `:hover` for basic accessibility
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+
   &:hover,
-  &:focus {
+  &:focus-visible {
+    color: var(--accent-hover);
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   strong {
@@ -50,29 +49,51 @@ a {
 img {
   display: block;
   max-width: 100%;
-  margin: 0 0 1rem;
-  border-radius: 5px;
+  height: auto;
+  margin: 1.25rem 0;
+  border-radius: 8px;
 }
 
 table {
-  margin-bottom: 1rem;
   width: 100%;
+  margin: 1.5rem 0;
   font-size: 85%;
-  border: 1px solid #e5e5e5;
+  line-height: 1.55;
   border-collapse: collapse;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+thead {
+  background-color: var(--table-header-bg);
 }
 
 td,
 th {
-  padding: .25rem .5rem;
-  border: 1px solid #e5e5e5;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border-subtle);
+  vertical-align: top;
 }
 
 th {
   text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-tbody tr:nth-child(odd) td,
-tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
+tbody tr:nth-child(even) td,
+tbody tr:nth-child(even) th {
+  background-color: var(--table-stripe-bg);
+}
+
+tbody tr:hover td,
+tbody tr:hover th {
+  background-color: var(--table-hover-bg);
 }

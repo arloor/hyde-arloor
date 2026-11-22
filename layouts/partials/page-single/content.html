@@ -1,32 +1,78 @@
-{{ $include_toc := .Params.include_toc}}
-<article>
-  <header>
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}
-    <span class="post__subtitle">
-      {{.}}
-    </span>
-    {{ end }}
-    {{ partial "page-single/post-meta.html" . }}
-  </header>
-  {{ $tableOfContents := .TableOfContents }}
-  {{ with .Site.Params.toc }}
-  {{ if ne $include_toc false }}
-    <div class="toc-wrapper">
-      <input type="checkbox" id="tocToggle">
-      <label for="tocToggle">Table of Content</label>
-      {{ if eq . "hugo" }}
-          {{ $tableOfContents }}
-      {{ else if eq . "tocbot"}}
-        <div class="toc" id="TableOfContents"></div>
+{{- $include_toc := .Params.include_toc -}}
+{{- $tableOfContents := .TableOfContents -}}
+{{- $tocMode := .Site.Params.toc -}}
+{{- $hasHugoToc := and (eq $tocMode "hugo") (ne $include_toc false) (in $tableOfContents "<li") -}}
+{{- $hasTocbot := and (eq $tocMode "tocbot") (ne $include_toc false) -}}
+
+<div class="reading-progress" aria-hidden="true">
+  <div class="reading-progress__bar" id="reading-progress-bar"></div>
+</div>
+
+<div class="post-layout{{ if $hasHugoToc }} post-layout--has-toc{{ end }}">
+  <article class="post-article">
+    <header class="post-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+      <span class="post__subtitle">{{ . }}</span>
       {{ end }}
+      {{ partial "page-single/post-meta.html" . }}
+    </header>
+
+    {{ if $hasHugoToc }}
+    <details class="toc-mobile">
+      <summary class="toc-mobile__summary">
+        <span class="toc-mobile__summary-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span>文章目录</span>
+        </span>
+        <svg class="toc-mobile__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </summary>
+      <div class="toc-mobile__body">
+        {{ replace $tableOfContents "id=\"TableOfContents\"" "class=\"toc-nav\"" | safeHTML }}
+      </div>
+    </details>
+    {{ else if $hasTocbot }}
+    <div class="toc-wrapper">
+      <div class="toc" id="TableOfContents"></div>
     </div>
+    {{ end }}
+
+    <div class="post">
+      {{ .Content }}
+    </div>
+
+    {{ partial "page-single/post-navigation.html" . }}
+    {{ partial "page-single/post-related.html" . }}
+    {{ partial "page-single/post-comment.html" . }}
+  </article>
+
+  {{ if $hasHugoToc }}
+  <aside class="toc-desktop" aria-label="文章目录">
+    <div class="toc-desktop__inner">
+      <div class="toc-desktop__title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span>文章目录</span>
+      </div>
+      <div class="toc-desktop__nav">
+        {{ $tableOfContents }}
+      </div>
+    </div>
+  </aside>
   {{ end }}
-  {{ end }}
-  <div class="post">
-    {{ .Content }}
-  </div>
-  {{ partial "page-single/post-navigation.html" . }}
-  {{ partial "page-single/post-related.html" . }}
-  {{ partial "page-single/post-comment.html" . }}
-</article>
+</div>

@@ -1,166 +1,57 @@
-// mobile ~320..480px
-// 320px ~ 16rem/16px ~ 18.8235/17px ~ 17.7778/18px
-// 480px ~ 30rem/16px ~ 28.2353rem/17px ~ 26.6667rem/18px
-@media (min-width: 320px) and (max-width: 767px) {
+// =============================================================================
+// Responsive Breakpoints
+// =============================================================================
 
+@media (max-width: 767px) {
   html,
   body {
     font-size: $small-device-font-size;
   }
 
-  .sidebar {
-    li {
-      padding: .1rem 0;
-    }
-
-    .container {
-      padding-left: 0;
-      padding-right: 0;
-    }
+  h1 {
+    font-size: 1.65rem;
   }
 
-  .hidden-tablet {
-    display: none;
+  h2 {
+    font-size: 1.32rem;
   }
 
-  .sidebar-about,
-  .copyright {
-    display: none;
+  .content.container {
+    padding-top: 1.5rem;
+    padding-bottom: 2.25rem;
   }
 
-  .sidebar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    margin: 0;
-    padding: 0;
+  .back-to-top {
+    right: 1rem;
+    bottom: 1.25rem;
+    width: 36px;
+    height: 36px;
   }
 
-  .menu-content {
-    padding: 0 0 0 0px;
-    max-height: 0;
-    overflow: hidden;
-    margin-top: 0;
-  }
-
-  .collapsible-menu {
-    padding: 0px 0px;
-  }
-
-  .collapsible-menu ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .collapsible-menu li {
-    display: block;
-  }
-
-  .collapsible-menu a {
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .collapsible-menu label {
-    background: url(/img/menu-open.svg) no-repeat left center;
-    background-position: 1.5rem;
-    display: block;
-    cursor: pointer;
-    color: #fff;
-    padding: 10px 0 10px 0px;
-  }
-
-  input#menuToggle {
-    display: none;
-  }
-
-  input#menuToggle+label {
-    font-weight: bold;
-  }
-
-  input#menuToggle:checked+label {
-    background-image: url(/img/menu-close.svg);
-    background-position: 1.5rem;
-    color: #fff;
-  }
-
-  input#menuToggle:checked~.menu-content {
-    max-height: 100% !important;
-  }
-
-  .menu-content--desktop,
-  .social-wrap--desktop {
-    display: none;
-  }
-
-  .social {
-    padding: 1em 0 1em 0;
+  .site-footer .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
-// tablet/medium device ~768px+
-// 768px ~ 48em/16px ~ 45.1765em/17px ~ 42.6667/18px
+// Tablet & Medium Desktop (>= 768px)
 @media (min-width: 768px) {
-
   html,
   body {
     font-size: $small-device-font-size;
   }
 
-  .post h1,
-  .post h2,
-  .post h3,
-  .post h4,
-  .post h5,
-  .post h6 {
-    scroll-margin-top: 1rem;
+  .menu-content--desktop {
+    display: flex;
   }
 
-  .show-in-small {
-    display: none;
+  .mobile-menu-btn,
+  .mobile-drawer {
+    display: none !important;
   }
 
-  .sidebar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    height: $sidebar-height;
-    min-height: $sidebar-height;
-    max-height: $sidebar-height;
-    padding: 0.45rem 1.25rem;
-    text-align: left;
-    z-index: 1000;
-    overflow: visible;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .sidebar-sticky {
-    position: static;
-    left: auto;
-    right: auto;
-    top: auto;
-  }
-
-  .content {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: $content-max-width;
-  }
-
-
-  .layout-reverse {
-    .sidebar {
-      left: 0;
-      right: 0;
-    }
-
-    .content {
-      margin-left: auto;
-      margin-right: auto;
-    }
+  .navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .col-sm-8 {
@@ -170,169 +61,28 @@
   .project__title {
     margin-top: 0.2rem;
   }
+}
 
-  .navigation {
-    display: flex;
-    justify-content: space-between;
-
-    a {
-      width: calc(50% - 10px);
-
-      &:nth-child(2) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  input#menuToggle,
-  input#menuToggle+label {
-    display: none;
-  }
-
-  .sidebar .container {
-    max-width: none;
-    width: 100%;
-    height: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    flex-wrap: nowrap;
-    min-width: max-content;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .sidebar-about {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-align: left;
-    line-height: 1;
-  }
-
-  .site__title {
-    font-size: 1.4rem;
-    margin-bottom: 0;
-    line-height: 1.15;
-  }
-
-  .site__title a {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .site__description {
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  .sidebar .author-image {
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-    align-self: center;
-    line-height: 0;
-  }
-
-  .sidebar .img--headshot {
-    height: 28px;
-    width: 28px;
-    display: block;
-    margin: 0;
-  }
-
-  .collapsible-menu {
-    display: none;
-  }
-
-  .menu-content--desktop {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-width: max-content;
-    max-height: none;
-    overflow: visible;
-    margin-top: 0;
-    padding: 0;
-  }
-
-  .menu-content--desktop > div {
-    display: flex;
-    align-items: center;
-  }
-
-  .menu-content--desktop > div > .sidebar-nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    justify-content: flex-start;
-    text-align: left;
-  }
-
-  .menu-content--desktop > div > .sidebar-nav > li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0;
-    line-height: 1.2;
-  }
-
-  .menu-content--desktop > div > .sidebar-nav > li > ul.sidebar-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .menu-content--desktop > div > .sidebar-nav > li > a {
-    display: inline-flex;
-    align-items: center;
-  }
-
+// Show desktop social icons only when viewport has enough width for nav + social
+@media (min-width: 960px) {
   .social-wrap--desktop {
-    margin-left: auto;
     display: flex;
-    align-items: center;
-  }
-
-  .social {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0;
-    margin: 0;
-  }
-
-  .copyright,
-  .builtwith {
-    display: none;
-  }
-
-  .sidebar-toggle-wrapper,
-  .sidebar-toggle {
-    display: none;
   }
 }
 
-// Large devices (laptops/desktops, 992px and up)
-// ~ 62rem/16px ~ 58.3529rem/17px ~ 55.1111rem/18px
+// Large Desktop (>= 992px — restored 19px root font size)
 @media (min-width: 992px) {
-
   html,
   body {
     font-size: $large-device-font-size;
   }
 
-  .layout-reverse .content {
-    margin-left: 4rem;
-    margin-right: 22rem;
+  .menu-content--desktop .sidebar-nav {
+    gap: 0.35rem;
+
+    > li > a {
+      padding: 6px 12px;
+    }
   }
 
   .col-md-4 {
@@ -350,8 +100,9 @@
   }
 }
 
-// Large device ~1024px
-// 1024px ~  64rem/16px ~ 60.2353rem/17px 56.8889rem/18px
-@media (min-width: 1024px) {
-  // styles
+// Wide Desktop (>= 1180px)
+@media (min-width: 1180px) {
+  .site__description {
+    display: inline-block;
+  }
 }

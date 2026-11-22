@@ -1,44 +1,218 @@
-// Hugo {{ .TableOfContents }}
-$toc-background-color: #eee;
-$toc-font-size: .9rem;
+// =============================================================================
+// Hugo Table of Contents (Mobile Collapsible Card + Desktop Sticky Glass Card)
+// =============================================================================
 
-.toc-wrapper {
-  font-size: $toc-font-size;
-  padding: 0.5em 0.5em 0.5em 0em;
-  background: $toc-background-color;
-  label {
-    background: url(/img/menu-close-dark.svg) no-repeat right center;
-    display: block;
-    cursor: pointer;
-    padding-left: 1em;
-  }
-}
-#TableOfContents {
+// Mobile & Tablet Collapsible TOC (< 1200px)
+.toc-mobile {
+  margin: 0 0 1.75rem 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background-color: var(--bg-surface);
   overflow: hidden;
-  margin-top: 0;
-  margin-left: 1rem;
-  max-height: 100%;
-  > ul {
-    list-style-type: none;
+}
+
+.toc-mobile__summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  user-select: none;
+  transition: background-color 0.15s ease;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:hover {
+    background-color: var(--bg-surface-hover);
+  }
+}
+
+.toc-mobile__summary-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    color: var(--accent);
+  }
+}
+
+.toc-mobile__chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.toc-mobile[open] .toc-mobile__chevron {
+  transform: rotate(180deg);
+}
+
+.toc-mobile__body {
+  padding: 0.45rem 1rem 0.95rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  line-height: 1.62;
+  max-height: 55vh;
+  overflow-y: auto;
+
+  ul {
+    list-style: none;
+    margin: 0;
     padding-left: 0;
-    > li ul {
-      list-style-type: none;
-      padding-left: 1em;
+  }
+
+  li {
+    margin: 0.25rem 0;
+
+    ul {
+      padding-left: 1rem;
+      margin-top: 0.2rem;
+    }
+  }
+
+  a {
+    display: block;
+    padding: 0.18rem 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--accent);
+      text-decoration: none;
     }
   }
 }
 
-input#tocToggle {
+// Wide Desktop Sticky Right Rail Card (>= 1280px)
+.toc-desktop {
   display: none;
-  + label {
-    font-weight: bold;
+}
+
+@media (min-width: 1280px) {
+  .toc-mobile {
+    display: none;
   }
-  &:checked {
-    + label {
-      background-image: url(/img/menu-open-dark.svg);
+
+  .toc-desktop {
+    display: block;
+    position: sticky;
+    top: calc(var(--navbar-height) + 1.5rem);
+    max-height: calc(100vh - var(--navbar-height) - 2.75rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 14px;
+    padding: 16px 14px 16px 16px;
+    box-shadow: var(--shadow-card);
+
+    // Subtle thin scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
     }
-    ~ #TableOfContents {
-      max-height: 0;
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--border-strong);
+      border-radius: 9999px;
     }
   }
+
+  .toc-desktop__title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 11px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border-subtle);
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+  }
+
+  .toc-desktop__nav {
+    border-left: 1px solid var(--border-subtle);
+    font-size: 13.5px;
+    line-height: 1.5;
+
+    #TableOfContents,
+    .toc-nav {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 0;
+
+      ul {
+        padding-left: 11px;
+      }
+    }
+
+    a {
+      display: block;
+      position: relative;
+      padding: 5px 8px 5px 12px;
+      margin-left: -1px;
+      border-left: 2px solid transparent;
+      color: var(--text-secondary);
+      text-decoration: none;
+      word-break: break-word;
+      border-radius: 0 7px 7px 0;
+      transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+
+      &:hover {
+        color: var(--text-primary);
+        background-color: var(--bg-surface-hover);
+        text-decoration: none;
+      }
+
+      &.is-active {
+        color: var(--accent);
+        font-weight: 600;
+        border-left-color: var(--accent);
+        background-color: var(--accent-soft);
+      }
+    }
+  }
+}
+
+// Legacy toc-wrapper fallback
+.toc-wrapper {
+  font-size: 0.88rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
 }

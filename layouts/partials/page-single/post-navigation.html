@@ -1,17 +1,17 @@
 {{ $enabledPostNavigation := .Site.Params.postNavigation | default true }}
-{{ if $enabledPostNavigation }}
-<div class="navigation navigation-single">
-    {{ with .PrevInSection }}
-    <a href="{{ .RelPermalink }}" class="navigation-prev">
-      <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">{{ .Title }}</span>
-    </a>
-    {{ end }}
-    {{ with .NextInSection }}
-    <a href="{{ .RelPermalink }}" class="navigation-next">
-      <span class="navigation-tittle">{{ .Title }}</span>
-      <i aria-hidden="true" class="fa fa-chevron-right"></i>
-    </a>
-    {{ end }}
-</div>
+{{ if and $enabledPostNavigation (or .PrevInSection .NextInSection) }}
+<nav class="navigation navigation-single" aria-label="文章导航">
+  {{ with .PrevInSection }}
+  <a href="{{ .RelPermalink }}" class="navigation-prev">
+    <span class="navigation-label">&larr; 上一篇</span>
+    <span class="navigation-tittle">{{ .Title }}</span>
+  </a>
+  {{ end }}
+  {{ with .NextInSection }}
+  <a href="{{ .RelPermalink }}" class="navigation-next">
+    <span class="navigation-label">下一篇 &rarr;</span>
+    <span class="navigation-tittle">{{ .Title }}</span>
+  </a>
+  {{ end }}
+</nav>
 {{ end }}

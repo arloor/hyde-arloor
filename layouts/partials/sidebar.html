@@ -1,67 +1,70 @@
-<!-- Sidebar -->
-<div class="sidebar">
-  <div class="container {{ with .Site.Params.sidebarSticky }}sidebar-sticky{{ end }}">
-    <div class="sidebar-about">
-      <span class="site__title">
-        <a href="/">
-          {{ with .Site.Params.logoimage }}
+<!-- Top Navigation Bar -->
+<header class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-brand">
+      <a class="sidebar-brand__link" href="/">
+        {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
+          <img src="{{ .Site.Params.authorimage }}" alt="{{ .Site.Title }}" class="img--circle img--headshot">
+        {{ else }}
+          {{ with .Site.Params.social.gravatar }}
+            <img src="https://www.gravatar.com/avatar/{{ md5 . }}?s=120&d=mp" alt="{{ $.Site.Title }}" class="img--circle img--headshot">
+          {{ end }}
+        {{ end }}
+        {{ with .Site.Params.logoimage }}
           {{ $strippedSlash := ($.Site.Params.logoimage | replaceRE "^(/)+(.*)" "$2") }}
           {{ $logoImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }}
-          <img src="{{$logoImage}}" alt="Logo Image" class="element--center">
-          {{ else }}
-          {{ .Site.Title }}
-          {{ end }}
-        </a>
-      </span>
-      <a href="/">
-        {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
-        <!-- {{ with .Site.Params.authorimage }}
-        {{ $strippedSlash := ($.Site.Params.authorimage | replaceRE "^(/)+(.*)" "$2") }}
-        {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }} -->
-        <div class="author-image">
-          <img src="{{$.Site.Params.authorimage}}" alt="Author Image" class="img--circle img--headshot element--center">
-        </div>
-        <!-- {{ end }} -->
+          <img src="{{ $logoImage }}" alt="{{ $.Site.Title }}" class="site__logo">
+        {{ else }}
+          <span class="site__title-text">{{ .Site.Title }}</span>
         {{ end }}
       </a>
-      {{ with .Site.Params.social.gravatar}}
-      <div class="author-image">
-        <img src="https://www.gravatar.com/avatar/{{md5 .}}?s=240&d=mp"
-          class="img--circle img--headshot element--center" alt="gravatar">
-      </div>
+      {{ with .Site.Params.description }}
+      <p class="site__description">{{ . }}</p>
       {{ end }}
-      <p class="site__description">
-        {{ with .Site.Params.description }} {{.}} {{end}}
-      </p>
     </div>
-    <div class="collapsible-menu">
-      <input type="checkbox" id="menuToggle">
-      <label for="menuToggle">{{ .Site.Title }}</label>
-      <div class="menu-content menu-content--mobile">
-        <div class="show-in-small">
-          <a href="/">
-            {{ if and (isset .Site.Params "authorimage") (not (isset .Site.Params.social "gravatar")) }}
-            <!-- {{ with .Site.Params.authorimage }}
-            {{ $strippedSlash := ($.Site.Params.authorimage | replaceRE "^(/)+(.*)" "$2") }}
-            {{ $authorImage := (printf "%s%s" $.Site.BaseURL $strippedSlash) }} -->
-            <div class="author-image">
-              <img src="{{$.Site.Params.authorimage}}" alt="Author Image"
-                class="img--circle img--headshot element--center">
-            </div>
-            <!-- {{ end }} -->
-            {{ end }}
-          </a>
-        </div>
-        {{ partial "sidebar/menu.html" . }}
+
+    <nav class="menu-content--desktop" aria-label="主导航">
+      {{ partial "sidebar/menu.html" . }}
+    </nav>
+
+    <div class="sidebar-actions">
+      <div class="social-wrap social-wrap--desktop">
         {{ partial "sidebar/social.html" . }}
       </div>
+      <button type="button" id="theme-toggle" class="navbar-icon-btn theme-toggle" aria-label="切换浅色/暗色主题" title="切换浅色/暗色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+      <button type="button" id="mobile-menu-btn" class="navbar-icon-btn mobile-menu-btn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobile-nav-drawer">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
     </div>
-    <div class="menu-content menu-content--desktop">
-      {{ partial "sidebar/menu.html" . }}
-    </div>
-    <div class="social-wrap social-wrap--desktop">
+  </div>
+
+  <div id="mobile-nav-drawer" class="mobile-drawer" aria-label="移动端导航">
+    {{ partial "sidebar/menu.html" . }}
+    <div class="mobile-drawer__social">
       {{ partial "sidebar/social.html" . }}
     </div>
-    {{ partial "sidebar/copyright.html" . }}
   </div>
-</div>
+</header>

@@ -3,9 +3,14 @@
 {{ end }}
 
 {{ define "content" }}
-<h1>404: Page not found</h1>
-<p class="lead">Sorry, we've misplaced that URL or it's pointing to something that doesn't exist. <a href="/">Head back home</a> to try finding it again.</p>
+<div class="not-found">
+  <div class="not-found__code">404</div>
+  <h1>页面未找到</h1>
+  <p class="lead">抱歉，你访问的链接可能已移动或不存在。</p>
+  <a class="not-found__btn" href="/">返回首页</a>
+</div>
 {{ end }}
 
 {{ define "footer" }}
+  {{ partial "footer/font-awesome-js.html" . }}
 {{ end }}

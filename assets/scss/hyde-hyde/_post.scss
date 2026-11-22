@@ -1,38 +1,190 @@
-.post__meta {
-  font-size: $meta-font-size;
-  color: $meta-color;
-  font-weight: $meta-font-weight;
+// =============================================================================
+// Single Post / Article Elevated Document Card & Right Rail Layout
+// =============================================================================
+
+.post-layout {
+  width: 100%;
+  min-width: 0;
 }
 
-.post__category {
-  font-weight: bold;
+.post-article {
+  min-width: 0;
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 2rem 2.2rem;
+  box-shadow: var(--shadow-card);
 }
 
-.post__tag {
-  background: $tag-background-color;
-  border-radius: 2px;
-  color: $tag-color;
-  font-size: $tag-font-size;
-  font-weight: bold;
-  padding: 2px 6px;
+@media (max-width: 767px) {
+  .post-article {
+    padding: 1.35rem 1.1rem;
+    border-radius: 14px;
+  }
 }
 
-.post__title {
-  background-image: -webkit-linear-gradient(left, $gradient-color-1, $gradient-color-2); /* For Chrome and Safari */
-  background-image:    -moz-linear-gradient(left, $gradient-color-1, $gradient-color-2); /* For old Fx (3.6 to 15) */
-  background-image:     -ms-linear-gradient(left, $gradient-color-1, $gradient-color-2); /* For pre-releases of IE 10*/
-  background-image:      -o-linear-gradient(left, $gradient-color-1, $gradient-color-2); /* For old Opera (11.1 to 12.0) */
-  background-image:         linear-gradient(to right, $gradient-color-1, $gradient-color-2); /* Standard syntax; must be last */
-  color:transparent;
-  -webkit-background-clip: text;
-  background-clip: text; 
- }
- 
+// Wide desktop 2-column layout with sticky right TOC card
+// Inner .post width matches original 56rem (~1064px at 19px)
+@media (min-width: 1280px) {
+  .post-layout--has-toc {
+    display: grid;
+    grid-template-columns: minmax(0, calc(var(--content-max-width, 56rem) + 4.4rem)) var(--toc-width, 240px);
+    gap: var(--toc-gap, 1.5rem);
+    align-items: start;
+    justify-content: center;
+  }
+}
+
+// Article Header
+.post-header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid var(--border-subtle);
+
+  h1 {
+    margin: 0 0 0.75rem 0;
+    font-size: $h1-font-size;
+    font-weight: $heading-font-weight;
+    line-height: $h1-line-height;
+    color: var(--text-primary);
+  }
+}
+
 .post__subtitle {
   display: block;
   font-size: $post__subtitle-font-size;
-  font-style: italic;
-  padding: 0 0 1rem 0;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
+}
+
+// Post Meta Bar
+.post__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  font-size: $meta-font-size;
+  color: var(--text-secondary);
+  font-weight: $meta-font-weight;
+}
+
+.post__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.post__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+
+  i,
+  svg {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+}
+
+.post__meta-taxonomies {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.post__category {
+  font-weight: 600;
+}
+
+.post__tag {
+  background: var(--badge-tag-bg);
+  border: 1px solid var(--badge-tag-border);
+  border-radius: 6px;
+  color: var(--badge-tag-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.18rem 0.55rem;
+}
+
+// Article Body Prose
+.post {
+  margin-bottom: 2.25rem;
+  font-size: 1rem;
+  line-height: $root-line-height;
+  color: var(--text-body);
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  li {
+    line-height: $root-line-height;
+
+    + li {
+      margin-top: 0.32rem;
+    }
+
+    > ul,
+    > ol {
+      margin-top: 0.32rem;
+      margin-bottom: 0.32rem;
+    }
+  }
+
+  img {
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-border);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+
+    &:hover {
+      color: var(--accent-hover);
+      text-decoration-color: var(--accent-hover);
+    }
+  }
+}
+
+// Related Articles
+.post__related {
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-subtle);
+
+  h2 {
+    font-size: 1.12rem;
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.related-posts {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+
+  li {
+    border-bottom: 1px solid var(--border-subtle);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
 #references {
