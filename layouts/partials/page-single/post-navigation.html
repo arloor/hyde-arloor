@@ -1,13 +1,20 @@
 {{ $enabledPostNavigation := .Site.Params.postNavigation | default true }}
-{{ if and $enabledPostNavigation (or .PrevInSection .NextInSection) }}
+{{ $prev := false }}
+{{ $next := false }}
+{{ if and $enabledPostNavigation .Section }}
+  {{ $sectionPages := .CurrentSection.RegularPages.ByDate.Reverse }}
+  {{ $prev = $sectionPages.Prev . }}
+  {{ $next = $sectionPages.Next . }}
+{{ end }}
+{{ if and $enabledPostNavigation (or $prev $next) }}
 <nav class="navigation navigation-single" aria-label="文章导航">
-  {{ with .PrevInSection }}
+  {{ with $prev }}
   <a href="{{ .RelPermalink }}" class="navigation-prev">
     <span class="navigation-label">&larr; 上一篇</span>
     <span class="navigation-tittle">{{ .Title }}</span>
   </a>
   {{ end }}
-  {{ with .NextInSection }}
+  {{ with $next }}
   <a href="{{ .RelPermalink }}" class="navigation-next">
     <span class="navigation-label">下一篇 &rarr;</span>
     <span class="navigation-tittle">{{ .Title }}</span>
