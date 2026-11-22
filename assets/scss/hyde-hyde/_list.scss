@@ -39,6 +39,7 @@
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 
   // Delicate top accent line that glides in on hover
@@ -52,6 +53,15 @@
     background: var(--accent-gradient);
     opacity: 0;
     transition: opacity 0.22s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .badge-category,
+  .badge-tag,
+  .item__read-more {
+    position: relative;
+    z-index: 2;
   }
 
   &:hover {
@@ -115,6 +125,13 @@
   a {
     color: var(--text-primary);
     text-decoration: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
 
     &:hover {
       color: var(--text-primary);
