@@ -29,7 +29,7 @@ $code-font-family: "SFMono-Regular", "SF-Mono", Menlo, Monaco, Consolas, "Libera
 // Typography Scale (exact match to original 17px small / 19px large desktop)
 $root-font-size: 17px;
 $root-font-weight: 400;
-$root-line-height: 1.667;
+$root-line-height: 1.58;
 
 $large-breakpoint: 38em;
 $large-font-size: 19px;
@@ -45,7 +45,7 @@ $border-color: $gray-2;
 
 $code-font-size: 1rem;
 $code-fence-font-size: 0.8rem;
-$code-line-height: 1.667;
+$code-line-height: 1.48;
 
 $link-color: $blue;
 $link-hover-color: #1d4ed8;
@@ -78,7 +78,7 @@ $h5-font-size: 1rem;
 // Layout dimensions
 $sidebar-color: #ffffff;
 $sidebar-width: 16rem;
-$sidebar-height: 56px;
+$sidebar-height: 48px;
 $site__title-font-size: 1.125rem;
 $copyright-font-size: 0.78rem;
 

@@ -101,8 +101,8 @@ body:not(.type-iframe)::before {
   margin-left: 0;
   margin-right: 0;
   flex: 1 0 auto;
-  padding-top: 2rem;
-  padding-bottom: 3.5rem;
+  padding-top: 1.15rem;
+  padding-bottom: 2.25rem;
 }
 
 body:not(.type-iframe) .content.container {
@@ -168,18 +168,18 @@ h1 {
   font-size: $h1-font-size;
   line-height: $h1-line-height;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
 }
 
 h2 {
   font-size: $h2-font-size;
-  margin-top: 2.25rem;
-  margin-bottom: 0.75rem;
+  margin-top: 1.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .post h2 {
   position: relative;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.22rem;
   border-bottom: 1px solid var(--border-subtle);
 
   &::after {
@@ -196,25 +196,25 @@ h2 {
 
 h3 {
   font-size: $h3-font-size;
-  margin-top: 1.75rem;
-  margin-bottom: 0.6rem;
+  margin-top: 1.15rem;
+  margin-bottom: 0.4rem;
 }
 
 h4 {
   font-size: $h4-font-size;
-  margin-top: 1.4rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.95rem;
+  margin-bottom: 0.35rem;
 }
 
 h5 {
   font-size: $h5-font-size;
-  margin-top: 1.2rem;
-  margin-bottom: 0.4rem;
+  margin-top: 0.85rem;
+  margin-bottom: 0.3rem;
 }
 
 p {
   margin-top: 0;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.75rem;
 }
 
 strong,
@@ -227,23 +227,23 @@ hr {
   border: 0;
   height: 1px;
   background: var(--border-subtle);
-  margin: 2rem 0;
+  margin: 1.35rem 0;
 }
 
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 1.15rem;
-  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+  padding-left: 1.45rem;
 }
 
 figure {
   max-width: 100%;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   padding: 0;
 
   img {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
 
   figcaption {
@@ -258,13 +258,13 @@ figure {
 // =============================================================================
 
 %quotebox {
-  padding: 0.95rem 1.2rem;
-  margin: 1.35rem 0;
+  padding: 0.65rem 1rem;
+  margin: 0.9rem 0;
   border: 1px solid var(--border-subtle);
   border-left: 3.5px solid;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 0.95rem;
-  line-height: 1.72;
+  line-height: 1.58;
   box-shadow: var(--shadow-sm);
 
   > :first-child {
