@@ -2,25 +2,47 @@
 <html lang="{{ .Site.LanguageCode }}">
 {{ block "header" . }}{{ end }}
 
-<body class="{{ .Site.Params.themeColor }} {{ if .Site.Params.layoutReverse }}layout-reverse{{ end }} {{ if eq .Type "iframe" }}type-iframe{{ end }}">
+<body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}} {{if eq .Type "iframe"}}type-iframe{{end}}">
   {{ partial "sidebar.html" . }}
-  <main class="content container">
+  <div class="content container">
     {{ block "content" . }}{{ end }}
-  </main>
-  {{ if ne .Type "iframe" }}
-  <footer class="site-footer">
-    <div class="site-footer__inner">
-      {{ partial "sidebar/copyright.html" . }}
-    </div>
-  </footer>
-  <button type="button" id="back-to-top" class="back-to-top" aria-label="回到顶部" title="回到顶部">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M18 15l-6-6-6 6"></path>
-    </svg>
-  </button>
-  {{ end }}
-  {{ block "footer" . }}{{ end }}
-  {{ partial "footer/ui-scripts.html" . }}
+  </div>
+<style>
+  .content.container {
+        width: 100%;
+        max-width: none;
+        border: none;
+        display: block;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+  }
+
+  body:not(.type-iframe) .content.container {
+        padding-left: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
+        padding-right: max(1.5rem, calc((100% - var(--content-max-width, 38rem)) / 2));
+  }
+
+  /* iframe 页：顶栏自然高度，剩余视口交给 iframe，不再用 JS 量高 */
+  body.type-iframe {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        overflow: hidden;
+  }
+
+  body.type-iframe .sidebar {
+        flex: 0 0 auto;
+  }
+
+  body.type-iframe .content.container {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        padding: 0;
+  }
+</style>
+{{ block "footer" . }}{{ end }}
 </body>
 
 </html>

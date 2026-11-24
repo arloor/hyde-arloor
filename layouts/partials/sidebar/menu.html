@@ -1,32 +1,27 @@
 <div>
 	<ul class="sidebar-nav">
-		{{- $currentPage := . -}}
-		{{- $pageURL := $currentPage.RelPermalink | strings.TrimSuffix "/" -}}
-		{{- range .Site.Menus.main -}}
-			{{- $menuURL := .URL | strings.TrimSuffix "/" -}}
-			{{- $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (eq $pageURL $menuURL) (and (ne $menuURL "") (hasPrefix $pageURL (printf "%s/" $menuURL))) -}}
-			{{- if .HasChildren -}}
-			<li{{ if $isActive }} class="active"{{ end }}>
-				<a href="#"{{ if $isActive }} class="active"{{ end }}>{{ .Pre }}
+		{{ $currentPage := . }} 
+		{{ range .Site.Menus.main }} 
+			{{ if .HasChildren }}
+			<li {{ if $currentPage.HasMenuCurrent "main" . }}class="active"{{ end }}>
+				<a href="#">{{ .Pre }}
 					<span>{{ .Name }}</span>
 				</a>
 				<ul class="sidebar-nav">
-					{{- range .Children -}}
-					{{- $childURL := .URL | strings.TrimSuffix "/" -}}
-					{{- $childActive := or ($currentPage.IsMenuCurrent "main" .) (eq $pageURL $childURL) -}}
-					<li{{ if $childActive }} class="active"{{ end }}>
-						<a href="{{ .URL }}"{{ if $childActive }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
+					{{ range .Children }}
+					<li {{ if $currentPage.IsMenuCurrent "main" . }}class="active"{{ end }}>
+						<a href="{{ .URL }}">{{ .Name | title }}</a>
 					</li>
-					{{- end -}}
+					{{ end }}
 				</ul>
 			</li>
-			{{- else -}}
-			<li>
-				<a href="{{ .URL }}"{{ if $isActive }} class="active" aria-current="page"{{ end }}>{{ .Pre }}
-					<span>{{ .Name }}</span>
-				</a>
-			</li>
-			{{- end -}}
-		{{- end -}}
+			{{ else }} <!-- No children -->
+				<li>
+					<a href="{{.URL}}">{{ .Pre }}
+						<span>{{ .Name | title }}</span>
+					</a>
+				</li>
+			{{ end }} 
+		{{ end }}
 	</ul>
 </div>

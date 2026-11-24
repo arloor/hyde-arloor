@@ -1,208 +1,74 @@
-// =============================================================================
-// Inline Code & IDE-Style Fenced Code Blocks (macOS Dots + Language + Copy)
-// =============================================================================
-
 pre {
-  margin: 0.9rem 0;
-  padding: 0;
-  border-radius: 10px;
-  overflow-x: auto;
-  tab-size: 2;
-  background-color: var(--code-block-bg) !important;
-  border: 1px solid var(--code-block-border);
-  box-shadow: var(--code-block-shadow);
-
-  code {
-    display: block;
-    font-family: $code-font-family;
-    font-size: $code-fence-font-size;
-    line-height: $code-line-height;
-    white-space: pre;
-    padding: 0.72rem 1rem;
-    background: transparent !important;
-    color: #abb2bf;
-    border-radius: 0;
-  }
+	//border: 1px solid $gray-1;
+	//border-radius: 2px;
+	tab-size: 2;
+	//width: 111%;
+	//margin-left: -11%;
+	//padding-left: 9%;
+	//padding-right: 2%;
+	//background: #29292e;
+	code {
+		white-space: pre-wrap;
+	}
 }
 
-// Inline code (not inside <pre> — exact original plain-text berry-rose style)
-:not(pre) > code {
-  font-family: $code-font-family;
-  font-size: $code-font-size;
-  padding: 0.1em 0.1em;
-  border-radius: 3px;
-  background-color: transparent;
-  border: none;
-  color: var(--code-inline-text);
-  font-weight: 400;
+%code-font {
+	font-family: $code-font-family;
+	font-size: $code-font-size;
 }
 
-a > code {
-  color: var(--accent);
+%code-in-rounded-box {
+	border-radius: 4px;
+	padding: 2px 4px;
+	color: #bf616a;
+	background-color: #f9f2f4;
 }
 
-// Heading inline code: keep inline code styling while scaling with heading size
+%code-style-codersblock {
+	padding: 2px 4px;
+	border: 1px dotted #adb5db;
+	background-color: $gray-1;
+}
+
+%code-style-npf {
+	padding: .1em .1em;
+	color: #ab5979;
+	border-radius: 3px;
+}
+
+a {
+	code {
+		color: $link-color;
+	}
+}
+
+code {
+	@extend %code-font;
+	@extend %code-style-npf;
+	// font-weight: 600;
+}
+
+// Do not apply inline code styling inside headings.
 h1 code,
 h2 code,
 h3 code,
 h4 code,
 h5 code,
 h6 code {
-  font-size: inherit;
-  font-weight: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+	border-radius: 0;
+	padding: 0;
 }
 
-// Highlight.js integration
+// highlight.js
 .hljs {
-  font-family: $code-font-family;
-  font-size: $code-fence-font-size;
-  line-height: $code-line-height;
-  white-space: pre;
-  padding: 0.72rem 1rem !important;
-  border: none;
-  border-radius: 0;
-  background: transparent !important;
-}
-
-// IDE Window Wrapper
-.code-block-wrapper {
-  margin: 0.9rem 0;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid var(--code-block-border);
-  background-color: var(--code-block-bg);
-  box-shadow: var(--code-block-shadow);
-
-  > pre {
-    margin: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-
-    // Subtle dark scrollbar inside code blocks
-    scrollbar-width: thin;
-    scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
-
-    &::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(148, 163, 184, 0.28);
-      border-radius: 9999px;
-    }
-  }
-}
-
-// IDE Titlebar (compact 32px height)
-.code-block-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
-  height: 32px;
-  padding: 0 0.7rem 0 0.85rem;
-  background-color: var(--code-header-bg);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-  user-select: none;
-}
-
-.code-block-header__left {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  min-width: 0;
-}
-
-// macOS Traffic-Light Dots
-.code-block-dots {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-
-  span {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.78;
-    transition: opacity 0.18s ease, transform 0.18s ease;
-  }
-
-  .dot-red {
-    background-color: #ff5f56;
-  }
-
-  .dot-yellow {
-    background-color: #ffbd2e;
-  }
-
-  .dot-green {
-    background-color: #27c93f;
-  }
-}
-
-.code-block-wrapper:hover .code-block-dots span {
-  opacity: 1;
-}
-
-.code-lang-badge {
-  font-family: $code-font-family;
-  font-size: 11.5px;
-  font-weight: 600;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #94a3b8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.copy-code-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.28rem;
-  height: 22px;
-  padding: 0 0.5rem;
-  background: rgba(148, 163, 184, 0.1);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 5px;
-  color: #cbd5e1;
-  font-family: $root-font-family;
-  font-size: 11.5px;
-  font-weight: 500;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
-
-  svg {
-    width: 13px;
-    height: 13px;
-    fill: currentColor;
-    flex-shrink: 0;
-  }
-
-  &:hover {
-    background: rgba(148, 163, 184, 0.22);
-    border-color: rgba(148, 163, 184, 0.38);
-    color: #ffffff;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-  }
-
-  &.copied {
-    background: rgba(22, 163, 74, 0.22);
-    border-color: rgba(34, 197, 94, 0.65);
-    color: #4ade80;
-  }
+	font-family: $code-font-family;
+	font-size: $code-fence-font-size;
+	line-height: $root-line-height;
+	white-space: pre;
+	border: 1px solid $gray-3;
+	border-radius: 4px;
 }

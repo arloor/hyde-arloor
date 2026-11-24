@@ -1,29 +1,26 @@
-@mixin transform($string) {
-  -webkit-transform: $string;
-  -moz-transform: $string;
-  -ms-transform: $string;
-  -o-transform: $string;
-  transform: $string;
+@mixin transform($string){
+	-webkit-transform: $string;
+	-moz-transform: 	 $string;
+	-ms-transform: 		 $string;
+	-o-transform: 		 $string;
 }
-
-@mixin rotate($deg) {
-  -webkit-transform: rotate($deg);
-  -moz-transform: rotate($deg);
-  -ms-transform: rotate($deg);
-  -o-transform: rotate($deg);
-  transform: rotate($deg);
+@mixin rotate($deg){
+	-webkit-transform: rotate($deg);
+	-moz-transform: 	 rotate($deg);
+	-ms-transform: 		 rotate($deg);
+	-o-transform: 		 rotate($deg);
 }
 
 @mixin link-no-decoration() {
-  border-style: none;
-  text-decoration: none;
+	border-style: none;
+	text-decoration: none;
 }
 
 @mixin link-hover() {
-  color: var(--accent-hover);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  background: transparent;
-  word-wrap: break-word;
+	color: $link-hover-color;
+	border-bottom: 1px dotted $gray-4;
+	text-decoration: none;
+	background: transparent;
+	background-color: transparent;
+	word-wrap: break-word;
 }
